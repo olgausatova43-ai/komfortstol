@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>КОМФОРТСТОЛ · Каталог столов · 3 уровня ценности</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --esp:#1c1611; --terra:#b8532f; --terra-l:#d06d45; --terra-d:#8c3c1e;
+  --brass:#c49a4a; --brass-l:#d9b26a; --cream:#f7f1e8; --cream2:#efe6d8;
+  --ink:#211914; --t2:#6d5f55; --t3:#a4948a; --bd:#e6dccf;
+  --l1:#8a7e76; --l2:#b8532f; --l3:#c49a4a;
+  --fd:'Unbounded',sans-serif; --fm:'Manrope',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:var(--fm);color:var(--ink);background:#0f0b08;overflow:hidden}
+
+.hud{position:fixed;top:0;left:0;right:0;z-index:99;height:52px;
+  background:rgba(16,12,9,.92);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.hud .brand{color:#fff;font-family:var(--fd);font-weight:700;font-size:15px;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.hud .brand img{height:30px;width:auto;background:#fff;border-radius:7px;padding:2px 5px}
+.hud .brand b{color:var(--terra-l)}
+.hud .tools{display:flex;gap:10px;align-items:center}
+.hud button{cursor:pointer;border:none;border-radius:9px;padding:9px 16px;
+  font-family:var(--fm);font-weight:800;font-size:13px;display:inline-flex;align-items:center;gap:7px;
+  background:linear-gradient(135deg,var(--terra),var(--terra-l));color:#fff}
+.hud .hint{color:#c3b6ac;font-size:12px;font-weight:600}
+
+.nav{position:fixed;top:50%;transform:translateY(-50%);z-index:98;width:46px;height:46px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.2);background:rgba(28,22,17,.7);color:#fff;cursor:pointer;font-size:16px}
+.nav:hover{background:var(--terra)}
+.nav.prev{left:18px}.nav.next{right:18px}
+.counter{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:98;
+  color:#c3b6ac;font-size:12px;font-weight:700;background:rgba(16,12,9,.8);padding:6px 16px;border-radius:99px}
+
+.deck{position:fixed;top:52px;left:0;right:0;bottom:0}
+.page{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;overflow:hidden}
+.page--dark{background:var(--esp);color:#fff}
+.wrap{width:100%;max-width:1280px;margin:0 auto;padding:5vh 6vw;flex:1;display:flex;flex-direction:column;min-height:0}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* СТАБИЛЬНАЯ ОБЛОЖКА НА ОТСТУПАХ (БЕЗ ФЛЕКСОВ И СЛОЖНЫХ СЕТОК)    */
+/* ═══════════════════════════════════════════════════════════════ */
+.cover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("birch-grove/birch-grove.jpg") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    
+    /* Занимаем всю высоту экрана ноутбука */
+    min-height: 100vh !important;
+    box-sizing: border-box !important;
+    
+    /* Возвращаем стандартное поведение элементов (строго друг за другом) */
+    display: block !important; 
+    text-align: left !important;
+    
+    /* Главный секрет: делаем большой верхний отступ, чтобы плавно опустить текст к центру */
+    padding-top: 25vh !important; 
+    padding-left: 10% !important;
+    padding-right: 10% !important;
+    padding-bottom: 60px !important;
+}
+
+/* Снимаем любые жесткие ограничения, текст идет свободно на всю ширину */
+.cover h1 {
+    font-family: var(--fd);
+    font-weight: 800;
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.cover .kick {
+    font-family: var(--fd);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--terra-l);
+    margin-bottom: 24px;
+    margin-top: 0 !important;
+}
+
+.cover h1 span {
+    color: var(--terra-l);
+}
+
+.cover .sub {
+    font-size: clamp(16px, 1.6vw, 20px);
+    color: #e2dad3;
+    max-width: 680px; 
+    line-height: 1.6;
+    margin-top: 24px;
+    margin-bottom: 0 !important;
+}
+
+.cover .sub b {
+    color: #ffffff !important;
+}
+
+.cover .stats {
+    display: flex !important;
+    gap: 48px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+}
+
+.cover .stat .n {
+    font-family: var(--fd);
+    font-weight: 800;
+    font-size: 40px;
+    color: var(--brass-l);
+}
+
+.cover .stat .l {
+    font-size: 13px;
+    color: #b3a598;
+    margin-top: 4px;
+}
+
+/* Возвращаем строчку «Киров...» в нормальный поток с аккуратным верхним отступом */
+.cover .foot {
+    display: block !important;
+    margin-top: 80px !important; 
+    padding-top: 32px;
+    font-size: 13px;
+    color: #8d7f72;
+    position: static !important; /* Отменяем абсолютное скрытие */
+    transform: none !important;
+}
+
+
+/* Стандартные стили текста (оставляем без изменений) */
+.cover .kick{font-family:var(--fd);font-size:14px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--terra-l);margin-bottom:24px}
+.cover h1{font-family:var(--fd);font-weight:800;font-size:clamp(38px,6vw,72px);line-height:1.05;letter-spacing:-.02em}
+.cover h1 span{color:var(--terra-l)}
+.cover .sub{font-size:clamp(16px,1.6vw,20px);color:#e2dad3;max-width:680px;line-height:1.6;margin-top:24px}
+.cover .sub b{color:#fff}
+.cover .stats{display:flex;gap:48px;margin-top:48px;flex-wrap:wrap}
+.cover .stat .n{font-family:var(--fd);font-weight:800;font-size:40px;color:var(--brass-l)}
+.cover .stat .l{font-size:13px;color:#b3a598;margin-top:4px}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* ГАРАНТИРОВАННАЯ ОТМЕНА ПСЕВДОЭЛЕМЕНТОВ НА ОБЛОЖКЕ             */
+/* !important обеспечивает приоритет над глобальным правилом      */
+/* ═══════════════════════════════════════════════════════════════ */
+.cover .wrap::before,
+.cover .wrap::after{
+  content:none !important;
+  display:none !important;
+  margin:0 !important;
+  height:0 !important;
+}
+
+.sec-kick{font-family:var(--fd);font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra)}
+.sec-h{font-family:var(--fd);font-weight:800;font-size:clamp(28px,3.5vw,44px);letter-spacing:-.02em;margin:10px 0 32px}
+.sec-h span{color:var(--terra)}
+.utp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;flex:1}
+.utp{background:var(--cream);border:1px solid var(--bd);border-left:4px solid var(--terra);border-radius:16px;padding:28px 24px;display:flex;flex-direction:column}
+.utp i{font-size:28px;color:var(--terra);margin-bottom:16px}
+.utp h3{font-family:var(--fd);font-size:17px;font-weight:700;line-height:1.3;margin-bottom:10px}
+.utp p{font-size:14px;color:var(--t2);line-height:1.6}
+
+.formula{background:var(--esp);border-radius:16px;padding:32px;color:#fff;margin-bottom:32px}
+.formula .f-row{display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap;font-family:var(--fd);font-size:clamp(18px,2.2vw,28px);font-weight:800;color:var(--brass-l)}
+.formula .f-row span{color:#fff}
+.formula .f-row .eq{color:var(--terra-l);font-size:clamp(24px,2.8vw,36px)}
+
+.toc{flex:1;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.toc-row{display:flex;align-items:baseline;gap:16px;font-size:17px;padding-bottom:12px;border-bottom:2px dotted var(--bd)}
+.toc-row .no{font-family:var(--fd);font-weight:800;font-size:20px;color:var(--terra);min-width:48px}
+.toc-row .t{font-family:var(--fd);font-weight:700}
+.toc-row .t small{display:block;font-size:12.5px;color:var(--t3);font-weight:500;margin-top:3px}
+.toc-row .pg{font-family:var(--fd);font-weight:700;color:var(--t2)}
+
+.lv{flex-direction:row;color:#fff}
+.lv-left{width:40%;padding:6vh 4vw;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.lv-left::after{content:"";position:absolute;top:-20%;right:-30%;width:60%;height:60%;background:radial-gradient(circle,rgba(184,83,47,.4),transparent 70%)}
+.lv--1,.lv--2,.lv--3{background:var(--esp)}
+.lv-num{font-family:var(--fd);font-weight:800;font-size:clamp(80px,12vw,160px);line-height:.9;opacity:.25}
+.lv-kick{font-family:var(--fd);font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--brass-l)}
+.lv-name{font-family:var(--fd);font-weight:800;font-size:clamp(24px,3vw,38px);line-height:1.15;margin-top:8px}
+.lv-name span{color:var(--terra-l)}
+.lv-price{margin-top:20px;font-family:var(--fd);font-weight:800;font-size:16px;padding:12px 20px;border-radius:12px;display:inline-block}
+.lp--1{background:var(--l1)}.lp--2{background:var(--l2)}.lp--3{background:var(--l3)}
+.lv-right{flex:1;background:var(--cream);color:var(--ink);padding:6vh 4vw;display:flex;flex-direction:column}
+.lv-desc{font-size:clamp(15px,1.4vw,18px);line-height:1.65;color:var(--t2);margin-bottom:24px}
+.lv-desc b{color:var(--ink)}
+.lv-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.lv-tags span{padding:8px 16px;background:#fff;border:1px solid var(--bd);border-radius:99px;font-size:14px;font-weight:700;color:var(--t2)}
+.lv-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.lv-box{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:22px}
+.lv-box .bt{font-family:var(--fd);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--terra);margin-bottom:12px}
+.lv-box p{font-size:14px;color:var(--t2);line-height:1.6}
+
+.mp{flex-direction:row}
+.mp-ph{width:46%;background:var(--cream2);position:relative;flex-shrink:0}
+.mp-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mp-ph .drop{position:absolute;inset:3vh 2vw;border:2px dashed rgba(28,22,17,.22);border-radius:16px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  color:var(--t3);font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}
+.mp-ph .drop i{font-size:40px}
+.mp-ph .rib{position:absolute;top:0;left:0;bottom:0;width:8px}
+.rib--1{background:var(--l1)}.rib--2{background:var(--l2)}.rib--3{background:var(--l3)}
+.mp-body{flex:1;padding:6vh 4vw;display:flex;flex-direction:column;min-width:0}
+.mp-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--t3);font-weight:700;margin-bottom:16px}
+.mp-top .lvl{color:var(--terra);text-transform:uppercase;letter-spacing:.1em;font-family:var(--fd)}
+.m-name{font-family:var(--fd);font-weight:800;font-size:clamp(24px,2.6vw,36px);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.badge{font-family:var(--fd);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-radius:6px;padding:4px 10px}
+.b-hit{background:var(--terra);color:#fff}.b-new{background:var(--brass);color:var(--esp)}.b-out{background:#eee;color:#8a7e76;border:1px solid #ddd}
+.m-mech{font-size:15px;color:var(--terra-d);font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin:10px 0 20px}
+.m-specs{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.m-specs div{display:flex;gap:12px;font-size:15px;color:var(--t2);line-height:1.5}
+.m-specs i{color:var(--terra);width:18px;margin-top:3px;flex-shrink:0}
+.m-specs b{color:var(--ink)}
+
+.m-value{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.value-tag{display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;line-height:1.25;border:1px solid transparent;font-family:var(--fm)}
+.v-func{background:#edf4ff;color:#245aa5;border-color:#cfe0fb}
+.v-aest{background:#fff4ed;color:#a84620;border-color:#f7d7c7}
+.v-ergo{background:#f3efff;color:#6243aa;border-color:#ddd3ff}
+.v-safe{background:#edf9f1;color:#207044;border-color:#cbe8d5}
+.v-rel{background:#f6f1e9;color:#765123;border-color:#e7d8bd}
+.v-opt{background:#eef7f2;color:#166534;border-color:#bbf7d0}
+
+.m-note{font-size:13px;color:#8a7e76;font-style:italic;border-left:2px solid var(--t3);padding:8px 12px;margin-bottom:16px;background:rgba(164,148,138,.06);border-radius:0 8px 8px 0}
+.m-arg{border-left:4px solid var(--terra);background:var(--cream);border-radius:0 12px 12px 0;padding:18px 22px;font-size:15px;color:var(--t2);line-height:1.6;margin-bottom:24px}
+.m-arg b{color:var(--terra-d);font-family:var(--fd);font-size:12px;text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:8px}
+.m-price{margin-top:auto;background:var(--esp);color:#fff;border-radius:14px;padding:20px 28px;display:flex;justify-content:space-between;align-items:center}
+.m-price .l{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--brass-l)}
+.m-price .v{font-family:var(--fd);font-weight:800;font-size:clamp(20px,2.2vw,30px)}
+
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;flex:1}
+.srv{background:var(--cream);border:1px solid var(--bd);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:12px}
+.srv i{color:var(--terra);font-size:26px}
+.srv h4{font-family:var(--fd);font-size:17px;font-weight:700}
+.srv p{font-size:14px;color:var(--t2);line-height:1.6}
+.addr{display:flex;gap:40px;align-items:center;flex:1}
+.addr .qr{width:200px;height:200px;background:#fff;border-radius:16px;padding:12px;flex-shrink:0}
+.addr .qr img{width:100%;height:100%}
+.addr h3{font-family:var(--fd);font-size:24px;margin-bottom:14px}
+.addr p{font-size:16px;color:#cbbdb2;line-height:1.7}
+.addr .ph{font-family:var(--fd);color:var(--brass-l);font-weight:700}
+
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0}
+.tech{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-top:4px solid var(--terra);border-radius:16px;padding:28px 24px}
+.tech .d{font-family:var(--fd);font-weight:800;font-size:34px;color:var(--brass-l);margin-bottom:12px}
+.tech h4{font-family:var(--fd);font-size:16px;font-weight:700;margin-bottom:10px}
+.tech p{font-size:14px;color:#cbbdb2;line-height:1.6}
+.tech-final{font-family:var(--fd);font-weight:700;font-size:clamp(16px,1.8vw,22px);color:#fff;line-height:1.5}
+.tech-final span{color:var(--terra-l)}
+
+@page{size:A5 landscape;margin:0}
+@media print{
+  body{overflow:visible;background:#fff}
+  .hud,.nav,.counter{display:none!important}
+  .deck{position:static}
+  .page{position:relative;inset:auto;display:flex!important;width:210mm;height:148mm;break-after:page;animation:none;box-shadow:none;overflow:visible!important}
+  .page:last-child{break-after:auto}
+  .seller-page{page-break-before:always}
+}
+
+.carousel{position:absolute;inset:0;overflow:hidden;background:var(--cream2)}
+.car-track{display:flex;height:100%;width:100%;transition:transform .4s ease}
+.car-slide{width:100%;height:100%;flex-shrink:0;background-size:cover;background-position:center;background-repeat:no-repeat}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:none;background:rgba(28,22,17,.55);color:#fff;font-size:20px;cursor:pointer;z-index:5;opacity:0;transition:opacity .25s;display:flex;align-items:center;justify-content:center;font-family:var(--fd)}
+.carousel:hover .car-btn{opacity:1}
+.car-btn:hover{background:var(--terra)}
+.car-prev{left:14px}
+.car-next{right:14px}
+.car-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:7px;z-index:5}
+.car-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.45);border:none;cursor:pointer;transition:background .2s}
+.car-dot.on{background:#fff}
+.car-counter{position:absolute;top:14px;right:14px;background:rgba(28,22,17,.55);color:#fff;font-size:11px;font-weight:800;padding:5px 12px;border-radius:99px;z-index:5;font-family:var(--fd)}
+@media (max-width:768px){.car-btn{opacity:1;width:32px;height:32px;font-size:16px}}
+
+.lv-models{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:18px 20px;margin-top:14px;flex:1;min-height:0;overflow-y:auto}
+.lv-models .bt{font-family:var(--fd);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--terra);margin-bottom:10px}
+.lv-models-list{display:grid;grid-template-columns:repeat(4,1fr);gap:5px 14px;list-style:none;padding:0;margin:0}
+.lv-models-list li{font-size:12.5px;color:var(--t2);line-height:1.4;padding-left:14px;position:relative}
+.lv-models-list li::before{content:"";position:absolute;left:0;top:5px;width:6px;height:6px;background:var(--terra);border-radius:50%}
+.lv-models-list li.out{color:var(--t3)}
+.lv-models-list li.out::after{content:" · вывод";font-size:9.5px;color:var(--t3);font-weight:700;margin-left:4px;text-transform:uppercase;letter-spacing:.06em}
+
+.lv-desc{margin-bottom:14px!important}
+.lv-tags{margin-bottom:14px!important}
+.lv-box{padding:16px!important}
+.lv-box p{font-size:13px!important}
+@media (max-width:900px){.lv-models-list{grid-template-columns:repeat(2,1fr)}}
+
+.utp-page .utp{padding:18px 18px}
+.utp-page .utp i{font-size:22px;margin-bottom:10px}
+.utp-page .utp h3{font-size:15px;margin-bottom:8px}
+.utp-page .utp p{font-size:12.5px}
+
+.val-table{display:flex;flex-direction:column;gap:7px;flex:1;min-height:0}
+.val-colhead{display:grid;grid-template-columns:44mm 1fr 1fr 1fr;gap:12px;padding:0 14px 6px}
+.val-colhead span{font-family:var(--fd);font-size:10px;font-weight:800;color:var(--terra-d);text-transform:uppercase;letter-spacing:.08em}
+.val-row{display:grid;grid-template-columns:44mm 1fr 1fr 1fr;gap:12px;align-items:stretch;
+  background:var(--cream);border:1px solid var(--bd);border-left:4px solid var(--terra);
+  border-radius:10px;padding:9px 14px;flex:1}
+.val-name .num{font-family:var(--fd);font-size:9px;font-weight:800;color:var(--terra);letter-spacing:.08em}
+.val-name h4{font-family:var(--fd);font-size:12.5px;font-weight:700;line-height:1.2;margin:2px 0}
+.val-name .sub{font-size:10px;color:var(--t3);font-weight:700}
+.val-cell{font-size:11px;color:var(--t2);line-height:1.4;align-self:center}
+.val-final{background:var(--esp);border-radius:12px;padding:11px 20px;font-family:var(--fd);font-weight:700;font-size:13px;color:#fff;line-height:1.45}
+.val-final span{color:var(--brass-l)}
+
+.groups-hero{background:
+  radial-gradient(circle at 20% 30%,rgba(184,83,47,.3),transparent 50%),
+  radial-gradient(circle at 80% 70%,rgba(196,154,74,.2),transparent 50%),
+  var(--esp);
+  color:#fff;justify-content:center;padding:4vh 5vw}
+.groups-hero .wrap{max-width:1180px;gap:18px;justify-content:center}
+.groups-kick{font-family:var(--fd);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-l);display:flex;align-items:center;gap:10px}
+.groups-kick::before{content:"";width:28px;height:2px;background:var(--brass)}
+.groups-h{font-family:var(--fd);font-weight:800;font-size:clamp(26px,3.2vw,42px);line-height:1.1;letter-spacing:-.02em;max-width:720px}
+.groups-h span{color:var(--terra-l)}
+.groups-lead{font-size:15px;color:#cbbdb2;line-height:1.6;max-width:760px}
+.groups-lead b{color:#fff}
+.groups-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.group{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 18px 16px;position:relative;overflow:hidden;border-top:3px solid;display:flex;flex-direction:column}
+.group--1{border-top-color:var(--l1)}.group--2{border-top-color:var(--l2)}.group--3{border-top-color:var(--l3)}
+.group .num{position:absolute;top:10px;right:14px;font-family:var(--fd);font-size:48px;font-weight:800;opacity:.1;line-height:1}
+.group--1 .num{color:var(--l1)}.group--2 .num{color:var(--l2)}.group--3 .num{color:var(--l3)}
+.group .tag{font-family:var(--fd);font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.group--1 .tag{color:#c4b8af}.group--2 .tag{color:var(--terra-l)}.group--3 .tag{color:var(--brass-l)}
+.group h4{font-family:var(--fd);font-size:15px;font-weight:700;line-height:1.25;margin-bottom:10px;color:#fff}
+.group .combo{display:inline-block;padding:5px 11px;border-radius:8px;font-family:var(--fd);font-size:11.5px;font-weight:700;margin-bottom:10px}
+.group--1 .combo{background:rgba(138,126,118,.2);color:#ddd1c5}
+.group--2 .combo{background:rgba(184,83,47,.18);color:var(--terra-l)}
+.group--3 .combo{background:rgba(196,154,74,.18);color:var(--brass-l)}
+.group .price{font-family:var(--fd);font-size:18px;font-weight:800;margin-bottom:8px}
+.group--1 .price{color:#ddd1c5}.group--2 .price{color:var(--terra-l)}.group--3 .price{color:var(--brass-l)}
+.group p{font-size:12.5px;color:#b3a598;line-height:1.45}
+.groups-foot{margin-top:12px;padding:10px 18px;background:rgba(196,154,74,.08);border:1px solid rgba(196,154,74,.25);border-radius:10px;font-size:12.5px;color:#d9b26a;line-height:1.5}
+.groups-foot i{color:var(--brass-l);margin-right:6px}
+@media (max-width:900px){.groups-grid{grid-template-columns:1fr}}
+
+.navmap{background:
+  radial-gradient(circle at 15% 20%,rgba(184,83,47,.16),transparent 45%),
+  radial-gradient(circle at 85% 80%,rgba(196,154,74,.12),transparent 45%),
+  var(--cream)}
+.navmap .wrap{padding:4vh 3.5vw;gap:9px}
+.navmap-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.navmap-head .sec-h{margin:0}
+.navmap-legend{display:flex;gap:14px;flex-wrap:wrap}
+.navmap-legend span{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:800;color:var(--t2)}
+.navmap-legend i{width:9px;height:9px;border-radius:3px}
+.navmap-body{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;flex:1;min-height:0;align-items:start}
+.nm-col{display:flex;flex-direction:column;gap:7px}
+.nm-group{display:flex;flex-direction:column;gap:3px}
+.nm-title{font-family:var(--fd);font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--terra);display:flex;align-items:center;gap:6px}
+.nm-title::after{content:"";flex:1;height:1px;background:var(--bd)}
+.nm-cell{display:flex;align-items:center;gap:6px;width:100%;border:1px solid var(--bd);border-left:3px solid var(--bd);border-radius:6px;background:#fff;padding:2mm 3mm;cursor:pointer;text-align:left;font-family:var(--fm);transition:all .15s}
+.nm-cell:hover{border-color:var(--terra);transform:translateX(2px);box-shadow:0 2px 8px rgba(28,22,17,.1)}
+.nm-cell .pg{font-family:var(--fd);font-size:8px;font-weight:800;color:#fff;background:var(--t3);border-radius:4px;padding:1mm 1.6mm;min-width:7mm;text-align:center;flex-shrink:0}
+.nm-cell .nm{font-size:9px;font-weight:700;color:var(--ink);line-height:1.2}
+.nm-cell.g0 .pg{background:var(--esp)}   .nm-cell.g0{border-left-color:var(--esp)}
+.nm-cell.g1 .pg{background:var(--l1)}   .nm-cell.g1{border-left-color:var(--l1)}
+.nm-cell.g2 .pg{background:var(--l2)}   .nm-cell.g2{border-left-color:var(--l2)}
+.nm-cell.g3 .pg{background:var(--l3)}   .nm-cell.g3{border-left-color:var(--l3)}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* ГЛОБАЛЬНОЕ ПРАВИЛО ЦЕНТРИРОВАНИЯ - ИДЁТ ПОСЛЕ ВСЕХ ПРАВИЛ     */
+/* Это гарантирует, что обложка уже отменила псевдоэлементы       */
+/* ═══════════════════════════════════════════════════════════════ */
+.wrap::before,.wrap::after{content:"";margin-top:auto;margin-bottom:auto}
+
+.toc{gap:8px}
+.toc-row{font-size:15px;padding-bottom:8px}
+.toc-row .no{font-size:16px;min-width:42px}
+.toc-row .t small{font-size:11px;margin-top:2px}
+@media (max-height:740px){
+  .toc{gap:5px}
+  .toc-row{padding-bottom:5px}
+  .toc-row .t small{display:none}
+}
+
+.anatomy{display:grid;grid-template-columns:1.15fr 1fr;gap:28px;flex:1;min-height:0;align-items:center}
+.anatomy-visual{
+  background:var(--cream2);border:2px dashed var(--bd);border-radius:16px;
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.anatomy-visual img{width:100%;height:100%;object-fit:contain;padding:20px}
+.anatomy-visual .placeholder{
+  color:var(--t3);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.anatomy-visual .placeholder i{font-size:48px;opacity:.5}
+.anatomy-list{display:flex;flex-direction:column;gap:12px}
+.anatomy-item{
+  background:var(--cream);border:1px solid var(--bd);border-left:4px solid var(--terra);
+  border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start;
+}
+.anatomy-item .num{
+  font-family:var(--fd);font-size:20px;font-weight:800;color:var(--terra);line-height:1;
+}
+.anatomy-item h4{font-family:var(--fd);font-size:14px;font-weight:700;margin-bottom:3px}
+.anatomy-item p{font-size:13px;color:var(--t2);line-height:1.5}
+
+.hor-list{display:flex;flex-direction:column;gap:14px;flex:1;min-height:0}
+.hor-card{
+  background:var(--cream);border:1px solid var(--bd);border-left:4px solid;
+  border-radius:14px;padding:18px 20px;display:grid;
+  grid-template-columns:180px 1fr;gap:20px;align-items:center;
+}
+.hor-card.h-basic{border-left-color:var(--l1)}
+.hor-card.h-mid{border-left-color:var(--l2)}
+.hor-card.h-premium{border-left-color:var(--l3)}
+
+.hor-visual{
+  background:var(--cream2);border:2px dashed var(--bd);border-radius:10px;
+  aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.hor-visual img{width:100%;height:100%;object-fit:contain;padding:10px}
+.hor-visual .placeholder{
+  color:var(--t3);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  text-align:center;
+}
+
+.hor-body h4{font-family:var(--fd);font-size:17px;font-weight:700;margin-bottom:6px}
+.hor-body .tag{
+  display:inline-block;font-family:var(--fd);font-size:10px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;
+}
+.hor-card.h-basic .hor-body .tag{color:var(--l1)}
+.hor-card.h-mid .hor-body .tag{color:var(--l2)}
+.hor-card.h-premium .hor-body .tag{color:var(--l3)}
+
+.hor-body .desc{font-size:14px;color:var(--t2);line-height:1.5;margin-bottom:8px}
+.hor-body .models{font-size:12px;color:var(--t3);font-style:italic;line-height:1.4;margin-bottom:10px}
+.hor-body .why{
+  background:#fff;border:1px solid var(--bd);border-radius:10px;padding:10px 14px;
+  font-size:13px;color:var(--ink);line-height:1.45;
+}
+.hor-body .why b{
+  color:var(--terra);font-family:var(--fd);font-size:10px;text-transform:uppercase;
+  letter-spacing:.08em;display:block;margin-bottom:4px;
+}
+
+.prog{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;flex:1;min-height:0}
+.prog-card{
+  background:var(--cream);border:1px solid var(--bd);border-top:4px solid;
+  border-radius:14px;padding:18px;display:flex;flex-direction:column;
+}
+.prog-card.p1{border-top-color:var(--l1)}
+.prog-card.p2{border-top-color:var(--l2)}
+.prog-card.p3{border-top-color:var(--l3)}
+
+.prog-visual{
+  background:var(--cream2);border:2px dashed var(--bd);border-radius:10px;
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;overflow:hidden;
+}
+.prog-visual img{width:100%;height:100%;object-fit:contain;padding:10px}
+.prog-visual .placeholder{
+  color:var(--t3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;text-align:center;
+}
+
+.prog-card .badge{
+  display:inline-block;font-family:var(--fd);font-size:10px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.12em;padding:4px 10px;border-radius:5px;
+  color:#fff;align-self:flex-start;margin-bottom:8px;
+}
+.prog-card.p1 .badge{background:var(--l1)}
+.prog-card.p2 .badge{background:var(--l2)}
+.prog-card.p3 .badge{background:var(--l3)}
+
+.prog-card h4{font-family:var(--fd);font-size:16px;font-weight:700;margin-bottom:4px}
+.prog-card .sub{font-size:12px;color:var(--t3);font-style:italic;margin-bottom:10px}
+.prog-card ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.prog-card ul li{font-size:13px;color:var(--t2);line-height:1.45;padding-left:16px;position:relative}
+.prog-card ul li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%}
+.prog-card.p1 ul li::before{background:var(--l1)}
+.prog-card.p2 ul li::before{background:var(--l2)}
+.prog-card.p3 ul li::before{background:var(--l3)}
+.prog-card .models{font-size:11px;color:var(--t3);font-style:italic;line-height:1.4;margin-bottom:12px}
+
+.prog-card .why{
+  margin-top:auto;
+  background:#fff;border:1px solid var(--bd);border-radius:10px;padding:10px 14px;
+  font-size:13px;color:var(--ink);line-height:1.45;
+}
+.prog-card .why b{
+  color:var(--terra);font-family:var(--fd);font-size:10px;text-transform:uppercase;
+  letter-spacing:.08em;display:block;margin-bottom:4px;
+}
+
+.noble-wrap{margin:0 0 16px}
+.noble-axis{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--fd);font-size:9px;font-weight:800;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--t3);margin-bottom:6px}
+.noble-axis .arr{flex:1;height:2px;margin:0 12px;border-radius:2px;
+  background:linear-gradient(90deg,var(--t3),var(--terra),var(--brass-l))}
+.noble-scale{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.noble-step{padding:8px 6px;border-radius:8px;text-align:center;
+  font-family:var(--fd);font-size:9.5px;font-weight:700;line-height:1.2;
+  border:1px solid var(--bd);color:var(--t2);background:var(--cream);opacity:.35}
+.noble-step.on{opacity:1;border-color:transparent;color:#fff}
+.noble-step.on.c-b{background:var(--l1)}
+.noble-step.on.c-m{background:var(--l2)}
+.noble-step.on.c-p{background:var(--brass)}
+
+.btn-order{
+  display:inline-block;
+  margin-top:20px;
+  padding:12px 24px;
+  background:var(--terra);
+  color:#fff;
+  border-radius:8px;
+  font-family:var(--fd);
+  font-weight:700;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  text-decoration:none;
+  transition:.2s;
+  border:none;
+  cursor:pointer;
+}
+.btn-order:hover{background:var(--terra-l)}
+
+.cover h1 span.stat-color {
+    color: var(--brass-l) !important;
+}
+
+</style>
+
+<style>
+html, body {
+  background: #f5f5f5 !important; /* ВАЖНО: цвет должен совпадать с фоном страниц */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.page {
+  /* Базовое состояние: мгновенно скрыта, не кликабельна */
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1 !important;
+  pointer-events: none;
+  transform: scale(0.98);
+  transition: none !important;
+}
+
+.page.on {
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 100 !important;
+  pointer-events: auto !important;
+  display: flex !important;
+  transform: scale(1);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.3, 1), 
+              transform 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) !important;
+}
+
+/* Титул — без собственных анимаций */
+.cover, .cover *, .page.cover {
+  transition: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* АДАПТАЦИЯ КАРТЫ КАТАЛОГА ДЛЯ НОУТБУКОВ И НЕБОЛЬШИХ ЭКРАНОВ      */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* 1. Разрешаем аккуратную прокрутку внутри карты, если экран ноутбука низкий */
+.navmap .wrap {
+  padding: 3vh 3vw !important;
+  gap: 12px !important;
+  max-height: calc(100vh - 80px) !important; /* Ограничиваем высоту, чтобы не вылезать за экран */
+  overflow-y: auto !important; /* Включаем скролл только при необходимости */
+  scrollbar-width: thin; /* Тонкий скроллбар для Firefox */
+  scrollbar-color: var(--terra) var(--cream); /* Цвета скроллбара */
+}
+
+/* Стилизация скроллбара для Chrome/Safari/Edge (чтобы было красиво) */
+.navmap .wrap::-webkit-scrollbar {
+  width: 6px;
+}
+.navmap .wrap::-webkit-scrollbar-track {
+  background: var(--cream);
+  border-radius: 3px;
+}
+.navmap .wrap::-webkit-scrollbar-thumb {
+  background: var(--terra);
+  border-radius: 3px;
+}
+
+/* 2. Делаем сетку адаптивной */
+.navmap-body {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* По умолчанию 4 колонки (для больших экранов) */
+  gap: 12px !important;
+  flex: 1;
+  min-height: 0;
+  align-items: start;
+}
+
+/* 3. Для ноутбуков (ширина экрана меньше 1100px) переключаем на 2 колонки */
+@media (max-width: 1100px) {
+  .navmap-body {
+    grid-template-columns: repeat(2, 1fr) !important; /* 2 колонки: гораздо читаемее на узком экране */
+  }
+  
+  .nm-cell .nm {
+    font-size: 10px !important; /* Чуть крупнее шрифт для удобства чтения на 2 колонках */
+    line-height: 1.3 !important;
+    white-space: normal !important; /* Разрешаем перенос длинных названий */
+  }
+  
+  .nm-cell .pg {
+    min-width: 8mm !important;
+    font-size: 9px !important;
+  }
+}
+
+/* 4. Для очень маленьких экранов или низких ноутбуков (меньше 768px по ширине или 700px по высоте) */
+@media (max-width: 768px), (max-height: 700px) {
+  .navmap-body {
+    grid-template-columns: 1fr !important; /* 1 колонка, чтобы точно всё влезло по ширине */
+  }
+  
+  .navmap-head {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  
+  .navmap-legend {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* 5. Фикс для ячеек, чтобы они не ломались при переносе текста */
+.nm-cell {
+  padding: 3mm 4mm !important; /* Чуть больше воздуха внутри кнопки */
+  min-height: 32px !important;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="hud">
+  <div class="brand"><img src="https://www.dropbox.com/scl/fi/m0alcfb9ehkwe4b8g3hn7/jgxx9a7b15g301ar8uj4qai9u4a5ee2w.png?rlkey=gno3azc58vyo617kh1nrfccfc&st=u4rz1g15&raw=1" alt="Логотип Комфортстол"><span style="white-space:nowrap">КОМФОРТ<b>СТОЛ</b></span> · Каталог столов</div>
+  <div class="tools">
+   <span class="hint">Листайте ← → · информация от 07.08.2026</span>
+<button onclick="goToMap()"><i class="fas fa-map"></i> Карта каталога</button>
+    <button onclick="window.print()"><i class="fas fa-file-pdf"></i> PDF</button>
+  </div>
+</div>
+<button class="nav prev" onclick="go(-1)"><i class="fas fa-chevron-left"></i></button>
+<button class="nav next" onclick="go(1)"><i class="fas fa-chevron-right"></i></button>
+<div class="counter" id="cnt"></div>
+
+<div class="deck" id="deck">
+
+  <!-- 01 · ТИТУЛ (ИСПРАВЛЕННАЯ ВЕРСИЯ - БЕЗ <img>) -->
+<section class="page cover on" id="p-cover">
+<!-- УДАЛЕНО: <img class="cover-bg" src="birch-grove.jpg"> -->
+<div class="wrap">
+    <div class="kick">Фабрика «Комфортстол» · каталог столов</div>
+    <h1><span class="stat-color">Столы.</span><br><span>Три уровня ценности.</span></h1>
+    <p class="sub">Три уровня сгруппированы по материалам и конструктиву. Чем выше уровень, тем больше возможностей по декорам, механизмам и форматам — и тем шире диапазон цен.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">3</div><div class="l">уровня ценности</div></div>
+      <div class="stat"><div class="n">36</div><div class="l">моделей столов</div></div>
+      <div class="stat"><div class="n">20+</div><div class="l">лет опыта</div></div>
+    </div>
+    <div class="foot">Киров, 2026 · comfortstol.com</div>
+  </div>
+</section>
+
+
+  <!-- 02 · ОГЛАВЛЕНИЕ -->
+<section class="page" id="p-toc">
+  <div class="wrap">
+    <div class="sec-kick">Содержание</div>
+    <h2 class="sec-h" style="margin:6px 0 18px">Оглавление</h2>
+    <div class="toc">
+      <div class="toc-row"><span class="no">—</span><span class="t">Карта каталога<small>Кликабельная навигация по всем страницам</small></span><span class="pg">03</span></div>
+      <div class="toc-row"><span class="no">—</span><span class="t">Почему Комфортстол<small>Уникальное предложение и 4 причины выбрать нас</small></span><span class="pg">04</span></div>
+      <div class="toc-row"><span class="no">—</span><span class="t">Как сравнивать столы · 5 свойств ценности<small>Формула «материал + конструктив = польза = цена»</small></span><span class="pg">05</span></div>
+      <div class="toc-row"><span class="no">01</span><span class="t">Начальный · Готовое решение<small>8 моделей · 10 557 – 20 196 ₽</small></span><span class="pg">06</span></div>
+      <div class="toc-row"><span class="no">02</span><span class="t">Оптимальный · Под себя<small>21 модель · 18 911 – 50 306 ₽</small></span><span class="pg">15</span></div>
+      <div class="toc-row"><span class="no">03</span><span class="t">Премиальный · Без границ<small>7 моделей · 42 082 – 100 980 ₽</small></span><span class="pg">37</span></div>
+      <div class="toc-row"><span class="no">—</span><span class="t">Обеденные группы<small>Ансамбль вместо предмета · 3 системных комплекта</small></span><span class="pg">45</span></div>
+      <div class="toc-row"><span class="no">—</span><span class="t">Массив, рассчитанный на годы<small>30 дней техпроцесса · мебель, которая служит десятилетиями</small></span><span class="pg">46</span></div>
+      <div class="toc-row"><span class="no">—</span><span class="t">Справочник · материалы и конструкции<small>Для внимательного выбора</small></span><span class="pg">47</span></div>
+      <div class="toc-row"><span class="no">—</span><span class="t">Условия и сервис<small>Гарантия, доставка, оплата, уход</small></span><span class="pg">51</span></div>
+      <div class="toc-row"><span class="no">—</span><span class="t">О компании и контакты<small>Производство, адрес салона</small></span><span class="pg">52</span></div>
+    </div>
+    <p style="font-size:12px;color:var(--t3);font-style:italic;margin-top:16px">Диапазоны цен уровней могут пересекаться — уровни различаются материалами и конструктивом, а не только ценой.</p>
+  </div>
+</section>
+
+      <!-- 03 · КАРТА КАТАЛОГА -->
+  <section class="page navmap" id="page-map">
+    <div class="wrap">
+      <div class="navmap-head">
+        <div>
+          <div class="sec-kick">Навигация</div>
+          <h2 class="sec-h">Карта каталога — клик по странице</h2>
+        </div>
+        <div class="navmap-legend">
+          <span><i style="background:var(--esp)"></i> Введение</span>
+          <span><i style="background:var(--l1)"></i> Уровень 01</span>
+          <span><i style="background:var(--l2)"></i> Уровень 02</span>
+          <span><i style="background:var(--l3)"></i> Уровень 03</span>
+        </div>
+      </div>
+
+      <div class="navmap-body">
+        <!-- ВВЕДЕНИЕ -->
+        <div class="nm-col">
+          <div class="nm-group"><div class="nm-title">Введение</div>
+            <button class="nm-cell g0" onclick="show(0)"><span class="pg">01</span><span class="nm">Титул</span></button>
+            <button class="nm-cell g0" onclick="show(1)"><span class="pg">02</span><span class="nm">Оглавление</span></button>
+            <button class="nm-cell g0" onclick="show(2)"><span class="pg">03</span><span class="nm">Карта каталога</span></button>
+            <button class="nm-cell g0" onclick="show(3)"><span class="pg">04</span><span class="nm">УТП · 4 причины</span></button>
+            <button class="nm-cell g0" onclick="show(4)"><span class="pg">05</span><span class="nm">Как сравнивать · 5 свойств</span></button>
+          </div>
+
+          <!-- УРОВЕНЬ 01 -->
+          <div class="nm-group"><div class="nm-title">Уровень 01 · Начальный</div>
+            <button class="nm-cell g1" onclick="show(5)"><span class="pg">06</span><span class="nm">Обложка уровня</span></button>
+            <button class="nm-cell g1" onclick="show(6)"><span class="pg">07</span><span class="nm">Смайл-1</span></button>
+            <button class="nm-cell g1" onclick="show(7)"><span class="pg">08</span><span class="nm">Бейсик 88</span></button>
+            <button class="nm-cell g1" onclick="show(8)"><span class="pg">09</span><span class="nm">Бейсик 6Д</span></button>
+            <button class="nm-cell g1" onclick="show(9)"><span class="pg">10</span><span class="nm">Бейсик 68</span></button>
+            <button class="nm-cell g1" onclick="show(10)"><span class="pg">11</span><span class="nm">Бейсик-5</span></button>
+            <button class="nm-cell g1" onclick="show(11)"><span class="pg">12</span><span class="nm">Бейсик-4</span></button>
+            <button class="nm-cell g1" onclick="show(12)"><span class="pg">13</span><span class="nm">Бейсик 6</span></button>
+            <button class="nm-cell g1" onclick="show(13)"><span class="pg">14</span><span class="nm">Бейсик-3</span></button>
+          </div>
+        </div>
+
+        <!-- УРОВЕНЬ 02 (часть 1) -->
+        <div class="nm-col">
+          <div class="nm-group"><div class="nm-title">Уровень 02 · Оптимальный</div>
+            <button class="nm-cell g2" onclick="show(14)"><span class="pg">15</span><span class="nm">Обложка уровня</span></button>
+            <button class="nm-cell g2" onclick="show(15)"><span class="pg">16</span><span class="nm">Эклипс</span></button>
+            <button class="nm-cell g2" onclick="show(16)"><span class="pg">17</span><span class="nm">Барон-5Д</span></button>
+            <button class="nm-cell g2" onclick="show(17)"><span class="pg">18</span><span class="nm">Юпитер-Д</span></button>
+            <button class="nm-cell g2" onclick="show(18)"><span class="pg">19</span><span class="nm">Фрейм-1</span></button>
+            <button class="nm-cell g2" onclick="show(19)"><span class="pg">20</span><span class="nm">Барон-3Д</span></button>
+            <button class="nm-cell g2" onclick="show(20)"><span class="pg">21</span><span class="nm">Барон-1Д</span></button>
+            <button class="nm-cell g2" onclick="show(21)"><span class="pg">22</span><span class="nm">Герцог</span></button>
+            <button class="nm-cell g2" onclick="show(22)"><span class="pg">23</span><span class="nm">Спейс-3</span></button>
+            <button class="nm-cell g2" onclick="show(23)"><span class="pg">24</span><span class="nm">Маркиз</span></button>
+            <button class="nm-cell g2" onclick="show(24)"><span class="pg">25</span><span class="nm">Барон-6</span></button>
+            <button class="nm-cell g2" onclick="show(25)"><span class="pg">26</span><span class="nm">Вуд-2</span></button>
+          </div>
+        </div>
+
+        <!-- УРОВЕНЬ 02 (часть 2) + СПРАВОЧНИК -->
+        <div class="nm-col">
+          <div class="nm-group"><div class="nm-title">Уровень 02 · продолжение</div>
+            <button class="nm-cell g2" onclick="show(26)"><span class="pg">27</span><span class="nm">Юпитер</span></button>
+            <button class="nm-cell g2" onclick="show(27)"><span class="pg">28</span><span class="nm">Вуд-1</span></button>
+            <button class="nm-cell g2" onclick="show(28)"><span class="pg">29</span><span class="nm">Барон-4</span></button>
+            <button class="nm-cell g2" onclick="show(29)"><span class="pg">30</span><span class="nm">Барон-2</span></button>
+            <button class="nm-cell g2" onclick="show(30)"><span class="pg">31</span><span class="nm">Граф ЛМДФ</span></button>
+            <button class="nm-cell g2" onclick="show(31)"><span class="pg">32</span><span class="nm">Аполло</span></button>
+            <button class="nm-cell g2" onclick="show(32)"><span class="pg">33</span><span class="nm">Аполло-2</span></button>
+            <button class="nm-cell g2" onclick="show(33)"><span class="pg">34</span><span class="nm">Барон-8</span></button>
+            <button class="nm-cell g2" onclick="show(34)"><span class="pg">35</span><span class="nm">Тиволи-1</span></button>
+            <button class="nm-cell g2" onclick="show(35)"><span class="pg">36</span><span class="nm">Тиволи</span></button>
+          </div>
+
+          <div class="nm-group"><div class="nm-title">Справочник</div>
+            <button class="nm-cell g0" onclick="show(46)"><span class="pg">47</span><span class="nm">Анатомия стола</span></button>
+            <button class="nm-cell g0" onclick="show(47)"><span class="pg">48</span><span class="nm">Материалы столешниц</span></button>
+            <button class="nm-cell g0" onclick="show(48)"><span class="pg">49</span><span class="nm">Механизмы трансформации</span></button>
+            <button class="nm-cell g0" onclick="show(49)"><span class="pg">50</span><span class="nm">Основания и опоры</span></button>
+          </div>
+        </div>
+
+        <!-- УРОВЕНЬ 03 + ГРУППЫ/МАССИВ + ФИНАЛ -->
+        <div class="nm-col">
+          <div class="nm-group"><div class="nm-title">Уровень 03 · Премиальный</div>
+            <button class="nm-cell g3" onclick="show(36)"><span class="pg">37</span><span class="nm">Обложка уровня</span></button>
+            <button class="nm-cell g3" onclick="show(37)"><span class="pg">38</span><span class="nm">Граф шпон</span></button>
+            <button class="nm-cell g3" onclick="show(38)"><span class="pg">39</span><span class="nm">Триумф</span></button>
+            <button class="nm-cell g3" onclick="show(39)"><span class="pg">40</span><span class="nm">Триумф НР</span></button>
+            <button class="nm-cell g3" onclick="show(40)"><span class="pg">41</span><span class="nm">Аполло керамогранит</span></button>
+            <button class="nm-cell g3" onclick="show(41)"><span class="pg">42</span><span class="nm">Фрейм керамогранит</span></button>
+            <button class="nm-cell g3" onclick="show(42)"><span class="pg">43</span><span class="nm">Фрейм-2 керамогранит</span></button>
+            <button class="nm-cell g3" onclick="show(43)"><span class="pg">44</span><span class="nm">Дуэт</span></button>
+          </div>
+
+          <div class="nm-group"><div class="nm-title">Группы и массив</div>
+            <button class="nm-cell g0" onclick="show(44)"><span class="pg">45</span><span class="nm">Обеденные группы</span></button>
+            <button class="nm-cell g0" onclick="show(45)"><span class="pg">46</span><span class="nm">Массив на годы</span></button>
+          </div>
+
+          <div class="nm-group"><div class="nm-title">Финал</div>
+            <button class="nm-cell g0" onclick="show(50)"><span class="pg">51</span><span class="nm">Сервис</span></button>
+            <button class="nm-cell g0" onclick="show(51)"><span class="pg">52</span><span class="nm">О компании</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · УТП -->
+<section class="page utp-page" id="p-utp">
+  <div class="wrap">
+    <div class="sec-kick">Уникальное торговое предложение</div>
+
+    <div style="margin-bottom:22px">
+      <h2 class="sec-h" style="margin:0 0 12px">Столы, <span>какими их ещё не видели.</span></h2>
+      <p style="font-size:16px;color:var(--t2);line-height:1.6;max-width:860px">
+        Мебель из живого дерева для кухни, гостиной или рабочего кабинета. Северная берёза сегодня — это чистые линии и восторг с первого взгляда.
+        <b style="color:var(--ink)">По цене обычной мебели.</b>
+        Переживёт ремонт, переезд — и достанется детям.
+      </p>
+    </div>
+
+    <div style="background:var(--esp);border-radius:14px;padding:16px 26px;margin-bottom:22px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center">
+      <span style="font-family:var(--fd);font-weight:700;font-size:14px;color:var(--brass-l)">Массив северной берёзы</span>
+      <span style="color:var(--terra-l)">·</span>
+      <span style="font-family:var(--fd);font-weight:700;font-size:14px;color:#fff">Собственное производство</span>
+      <span style="color:var(--terra-l)">·</span>
+      <span style="font-family:var(--fd);font-weight:700;font-size:14px;color:#fff">Европейское качество</span>
+      <span style="color:var(--terra-l)">·</span>
+      <span style="font-family:var(--fd);font-weight:700;font-size:14px;color:#fff">Доступная цена</span>
+    </div>
+
+    <h3 style="font-family:var(--fd);font-size:17px;font-weight:700;margin-bottom:16px;color:var(--terra)">4 причины выбрать нас</h3>
+    <div class="utp-grid">
+      <div class="utp"><i class="fas fa-tree"></i><h3>Массив северной берёзы</h3><p>Ножки столов выполняются из массива северной берёзы — в базовой комплектации отдельных моделей или как опция.</p></div>
+      <div class="utp"><i class="fas fa-industry"></i><h3>Собственное производство</h3><p>Фабрика производит и поставляет продукцию напрямую — без посредников между изготовителем и торговой точкой.</p></div>
+      <div class="utp"><i class="fas fa-cubes"></i><h3>Материалы под задачу</h3><p>В линейке используются столешницы Egger, закалённое стекло 4 мм, HPL, натуральный шпон и керамогранит — в зависимости от выбранного уровня и модели.</p></div>
+      <div class="utp"><i class="fas fa-sliders"></i><h3>Конфигурации и декоры</h3><p>Для ряда моделей доступны разные декоры столешницы, цвета ножек, размеры и материалы.</p></div>
+    </div>
+  </div>
+</section>
+
+  <!-- 05 · КАК СРАВНИВАТЬ СТОЛЫ -->
+<section class="page" id="p-compare">
+  <div class="wrap" style="padding:3.5vh 3.5vw">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:12px;flex-wrap:wrap">
+      <div>
+        <div class="sec-kick" style="margin-bottom:6px">Как сравнивать столы</div>
+        <h2 class="sec-h" style="margin:0;font-size:clamp(20px,2.4vw,30px)">Выбирайте <span>пользу</span>, а не цену</h2>
+      </div>
+      <div class="formula" style="padding:12px 22px;margin:0">
+        <div class="f-row" style="font-size:clamp(13px,1.5vw,19px)"><span>Материал</span><span class="eq">+</span><span>Конструктив</span><span class="eq">=</span><span>Польза</span><span class="eq">=</span><span>Цена</span></div>
+      </div>
+    </div>
+
+    <div class="val-table">
+      <div class="val-colhead"><span>Свойство</span><span>Что оцениваем</span><span>Что это даёт вам</span><span>За счёт каких характеристик</span></div>
+
+      <div class="val-row">
+        <div class="val-name"><div class="num">01</div><h4>Функциональность</h4><div class="sub">Многозадачность</div></div>
+        <div class="val-cell">Сколько бытовых сценариев закрывает стол и насколько легко он подстраивается под меняющиеся нужды семьи.</div>
+        <div class="val-cell">Универсальность: одно решение подходит и для семейного завтрака, и для удалённой работы, и для праздника.</div>
+        <div class="val-cell">Трансформация из компактного формата в большой, удобная вставка-«бабочка» для быстрого приёма гостей.</div>
+      </div>
+
+      <div class="val-row">
+        <div class="val-name"><div class="num">02</div><h4>Эстетика</h4><div class="sub">Визуальное и тактильное удовольствие</div></div>
+        <div class="val-cell">Как стол интегрируется в интерьер и какие эмоции вызывает; мебель дарит радость от ежедневного созерцания.</div>
+        <div class="val-cell">Эстетический комфорт и гордость за выбор; стол становится визуальным центром комнаты и подчёркивает вкус.</div>
+        <div class="val-cell">Благородные текстуры шпона и керамогранита, глубокое тиснение Feelwood, изящный скошенный край.</div>
+      </div>
+
+      <div class="val-row">
+        <div class="val-name"><div class="num">03</div><h4>Эргономика</h4><div class="sub">Комфорт использования</div></div>
+        <div class="val-cell">Насколько удобно сидеть за столом, вставать из-за него и взаимодействовать с элементами конструкции.</div>
+        <div class="val-cell">Физическое расслабление и свободу движений: вы не бьётесь коленями о ножки и не чувствуете тесноты.</div>
+        <div class="val-cell">Выверенное соотношение формы и габаритов, свободное пространство под столом, интуитивная логика раскладки.</div>
+      </div>
+
+      <div class="val-row">
+        <div class="val-name"><div class="num">04</div><h4>Безопасность</h4><div class="sub">Защита и спокойствие</div></div>
+        <div class="val-cell">Минимизацию любых рисков травм в процессе ежедневной, даже самой активной эксплуатации.</div>
+        <div class="val-cell">Чувство защищённости и спокойствия за близких, особенно если в доме есть маленькие дети или животные.</div>
+        <div class="val-cell">Отсутствие острых углов у круглых и овальных моделей, закалённое стекло от 4 мм с обработкой краёв.</div>
+      </div>
+
+      <div class="val-row">
+        <div class="val-name"><div class="num">05</div><h4>Надёжность</h4><div class="sub">Долговечность и уверенность</div></div>
+        <div class="val-cell">Способность стола сохранять первоначальный вид, геометрию и исправность механизмов в течение долгих лет.</div>
+        <div class="val-cell">Уверенность в оправданности инвестиций: вам не придётся менять мебель через пару лет.</div>
+        <div class="val-cell">Прочный каркас из массива, износостойкие фабричные покрытия, полный технологический цикл сборки.</div>
+      </div>
+    </div>
+
+    <div class="val-final" style="margin-top:10px">Выбирая стол, смотрите глубже ценника. <span>Инвестируйте в ежедневный комфорт, безопасность семьи и удовольствие от каждого взгляда на ваш интерьер.</span></div>
+  </div>
+</section>
+
+  <!-- 06 · ОБЛОЖКА 01 -->
+<section class="page lv" id="p-l1-cover">
+  <div class="lv-left lv--1">
+    <div><div class="lv-kick">Уровень 01 · 8 моделей</div>
+      <div class="lv-num">01</div>
+      <div class="lv-name">Начальный ·<br><span>Готовое решение</span></div></div>
+    <div class="lv-price lp--1">Столы 10 557 – 20 196 ₽</div>
+  </div>
+    <div class="lv-right">
+    <p class="lv-desc">Вход в линейку: столешницы <b>Egger 16 мм</b>, простая и надёжная конструкция, компактные форматы. Идеально для кухни, дачи и первой квартиры — практичное решение без переплат.</p>
+    <div class="lv-tags"><span>ЛДСП / ЛМДФ Egger 16 мм</span><span>Металлокаркас / массив как опция</span><span>Вставка / стационар</span><span>Стекло 4 мм на Egger 16 мм</span></div>
+    <div class="lv-grid">
+      <div class="lv-box"><div class="bt">Для кого</div><p>Для тех, кто ищет практичный стол без переплат: кухня, дача, съём, первая покупка. Быстрое готовое решение.</p></div>
+      <div class="lv-box"><div class="bt">Что внутри</div><p>Столешницы ЛДСП или ЛМДФ Egger 16 мм; в отдельных моделях — закалённое стекло 4 мм. Основание: металлокаркас, декоративные ноги или массив северной берёзы как опция.</p></div>
+    </div>
+    <div class="lv-models">
+      <div class="bt">8 моделей уровня</div>
+      <ul class="lv-models-list">
+        <li>Смайл-1</li>
+        <li>Бейсик 88</li>
+        <li class="out">Бейсик 6Д</li>
+        <li>Бейсик 68</li>
+        <li>Бейсик-5</li>
+        <li>Бейсик-4</li>
+        <li>Бейсик 6</li>
+        <li class="out">Бейсик-3</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 07 · СМАЙЛ-1 -->
+  <!-- ОПТ: 6210 × 1,7 = 10557 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--1"></div><div class="drop"><i class="fas fa-image"></i>Фото · Смайл-1</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 01</span><span>модель 01 / 08</span></div>
+      <div class="m-name">Смайл-1 <span class="badge b-hit">Хит</span></div>
+      <div class="m-mech">Со вставкой · раскладной</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 110/150×68, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛДСП или ЛМДФ Egger 16 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая / каштановая; мрамор кристалл</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — опция +6 242 ₽</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: раскладка 110→150 см</span>
+        <span class="value-tag v-aest">Эстетика: декоры Egger</span>
+        <span class="value-tag v-opt">Опция: массив северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Раскладной формат и столешница Egger: практичный стол на каждый день, массивные ножки — опцией.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 10 557 ₽</span></div></div></section>
+
+  <!-- 08 · Бейсик 88 -->
+  <!-- ОПТ: 8100 × 1,7 = 13770 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--1"></div><div class="drop"><i class="fas fa-image"></i>Фото · Бейсик 88</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 01</span><span>модель 02 / 08</span></div>
+      <div class="m-name">Бейсик 88</div>
+      <div class="m-mech">Вставка «бабочка» · ЛДСП</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 80/114×80, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛДСП или ЛМДФ Egger 16 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая / каштановая; мрамор кристалл</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — опция +6 242 ₽</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: «бабочка» 80→114 см</span>
+        <span class="value-tag v-aest">Эстетика: декоры Egger</span>
+        <span class="value-tag v-opt">Опция: массив северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Механизм «бабочка» в компактном формате: стол раскладывается под гостей и не занимает место.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 13 770 ₽</span></div></div></section>
+
+  <!-- 09 · Бейсик 6Д -->
+  <!-- ОПТ: 8532 × 1,7 = 14504 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--1"></div><div class="drop"><i class="fas fa-image"></i>Фото · Бейсик 6Д</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 01</span><span>модель 03 / 08</span></div>
+      <div class="m-name">Бейсик 6Д <span class="badge b-out">Вывод</span></div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 110/150×68, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛДСП или ЛМДФ Egger 16 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая; мрамор кристалл</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — опция +6 242 ₽</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 110→150 см</span>
+        <span class="value-tag v-aest">Эстетика: декоры Egger</span>
+        <span class="value-tag v-opt">Опция: массив северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Остатки со склада: доступна ограниченная партия с возможностью выбора комплектации с массивными ножками.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 14 504 ₽</span></div></div></section>
+
+  <!-- 10 · Бейсик 68 -->
+  <!-- ОПТ: 8586 × 1,7 = 14596 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--1"></div><div class="drop"><i class="fas fa-image"></i>Фото · Бейсик 68</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 01</span><span>модель 04 / 08</span></div>
+      <div class="m-name">Бейсик 68</div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 60/120×82, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> закалённое стекло 4 мм на ЛДСП Egger 16 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> стекло белое; ноги белый, венге</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — опция +6 242 ₽</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 60→120 см</span>
+        <span class="value-tag v-safe">Безопасность: закалённое стекло 4 мм</span>
+        <span class="value-tag v-aest">Эстетика: стеклянная столешница</span>
+        <span class="value-tag v-opt">Опция: массив северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Закалённое стекло 4 мм и узкий формат 60–120 см для небольших помещений.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 14 596 ₽</span></div></div></section>
+
+  <!-- 11 · Бейсик-5 -->
+  <!-- ОПТ: 8910–9990 × 1,7 = 15147–16983 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--1"></div><div class="drop"><i class="fas fa-image"></i>Фото · Бейсик-5</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 01</span><span>модель 05 / 08</span></div>
+      <div class="m-name">Бейсик-5</div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 90/130×65, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛДСП или ЛМДФ 16 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> ЛМДФ-дубы; мрамор кристалл, ароза реликт, бетон, дуб крафт серый</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Основание:</b> металлокаркас, чёрный / белый</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 90→130 см</span>
+        <span class="value-tag v-rel">Основание: металлокаркас</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Металлокаркас и практичные декоры: раскладка до 130 см для семьи, работы и приема гостей.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">15 147 – 16 983 ₽</span></div></div></section>
+
+  <!-- 12 · Бейсик-4 -->
+  <!-- ОПТ: 9288–10476 × 1,7 = 15790–17809 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--1"></div><div class="drop"><i class="fas fa-image"></i>Фото · Бейсик-4</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 01</span><span>модель 06 / 08</span></div>
+      <div class="m-name">Бейсик-4</div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 110/160×68, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛДСП или ЛМДФ 16 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> ЛМДФ-дубы (вкл. каселла каштановая NEW); мрамор кристалл, ароза, бетон, крафт</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Основание:</b> металлокаркас, чёрный / белый</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 110→160 см</span>
+        <span class="value-tag v-rel">Основание: металлокаркас</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Крупный формат базового уровня: 160 см в разложке и основание из металлокаркаса.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">15 790 – 17 809 ₽</span></div></div></section>
+
+  <!-- 13 · Бейсик 6 -->
+  <!-- ОПТ: 10368 × 1,7 = 17626 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--1"></div><div class="drop"><i class="fas fa-image"></i>Фото · Бейсик 6</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 01</span><span>модель 07 / 08</span></div>
+      <div class="m-name">Бейсик 6</div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 110/150×68, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> закалённое стекло 4 мм на ЛДСП Egger 16 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> стекло белое, крем; царга белый, выб. дуб, венге</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — опция +6 242 ₽</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 110→150 см</span>
+        <span class="value-tag v-safe">Безопасность: закалённое стекло 4 мм</span>
+        <span class="value-tag v-aest">Эстетика: стеклянная столешница</span>
+        <span class="value-tag v-opt">Опция: массив северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Стекло на базе Egger 16 мм и возможность массивных ножек — вершина пользы на Начальном уровне.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 17 626 ₽</span></div></div></section>
+
+  <!-- 14 · Бейсик-3 -->
+  <!-- ОПТ: 10854–11880 × 1,7 = 18452–20196 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--1"></div><div class="drop"><i class="fas fa-image"></i>Фото · Бейсик-3</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 01</span><span>модель 08 / 08</span></div>
+      <div class="m-name">Бейсик-3 <span class="badge b-out">Вывод</span></div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 120/170×80, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛДСП или ЛМДФ 16 мм, основание металлокаркас</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> ЛМДФ-дубы; мрамор кандела/кристалл, акация шеффилд, ароза, бетон, крафт</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Основание:</b> металлокаркас, чёрный / белый</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 120→170 см</span>
+        <span class="value-tag v-rel">Основание: металлокаркас</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Остатки со склада: доступна ограниченная партия с раскладкой до 170 см на базовом уровне.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">18 452 – 20 196 ₽</span></div></div></section>
+
+  <!-- 15 · ОБЛОЖКА 02 -->
+<section class="page lv">
+  <div class="lv-left lv--2">
+    <div><div class="lv-kick">Уровень 02 · 21 модель</div>
+      <div class="lv-num">02</div>
+      <div class="lv-name">Оптимальный ·<br><span>Под себя</span></div></div>
+    <div class="lv-price lp--2">Столы 18 911 – 50 306 ₽</div>
+  </div>
+    <div class="lv-right">
+    <p class="lv-desc">Ядро ассортимента: столешницы <b>Egger 22/25 мм</b>, модели со стеклом, HPL и механизмами «бабочка». Feelwood 25 мм доступен в отдельных моделях. Массив северной берёзы — в отдельных конфигурациях или как опция.</p>
+    <div class="lv-tags"><span>Egger 22/25 мм · стекло · HPL</span><span>«Бабочка» и вставки</span><span>Feelwood 25 мм в отдельных моделях</span><span>Массив как опция</span></div>
+    <div class="lv-grid">
+      <div class="lv-box"><div class="bt">Для кого</div><p>Для семьи, которая выбирает стол «на годы»: гости и раскладка, декор под интерьер, круглые форматы, удобная посадка.</p></div>
+      <div class="lv-box"><div class="bt">Что внутри</div><p>ЛМДФ Egger 25 мм, закалённое стекло на Egger 25 мм, HPL 38 мм; ноги: массив / МДФ / металл по модели; скошенный край у Герцога.</p></div>
+    </div>
+    <div class="lv-models">
+      <div class="bt">21 модель уровня</div>
+      <ul class="lv-models-list">
+        <li>Эклипс</li>
+        <li>Барон-5Д</li>
+        <li>Юпитер-Д</li>
+        <li>Фрейм-1</li>
+        <li>Барон-3Д</li>
+        <li class="out">Барон-1Д</li>
+        <li>Герцог</li>
+        <li>Спейс-3</li>
+        <li>Маркиз</li>
+        <li>Барон-6</li>
+        <li class="out">Вуд-2</li>
+        <li>Юпитер</li>
+        <li>Вуд-1</li>
+        <li>Барон-4</li>
+        <li>Барон-2</li>
+        <li>Граф ЛМДФ</li>
+        <li>Аполло</li>
+        <li>Аполло-2</li>
+        <li class="out">Барон-8</li>
+        <li>Тиволи-1</li>
+        <li>Тиволи</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+  <!-- 16 · Эклипс -->
+  <!-- ОПТ: 11124–12150 × 1,7 = 18911–20655 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Эклипс</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 01 / 21</span></div>
+      <div class="m-name">Эклипс <span class="badge b-hit">Хит</span></div>
+      <div class="m-mech">Вставка «бабочка»</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 130/170×80 и 110/144×68, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛДСП «мрамор кристалл» или ЛМДФ Egger 25 мм Feelwood</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры ЛМДФ:</b> дуб коньяк, натуральный, каселла коричневая / каштановая</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> для версии ЛДСП доступны ноги ДК (+6 242 ₽); в ЛМДФ-конфигурации — массив северной берёзы</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: «бабочка» до 170 см</span>
+        <span class="value-tag v-aest">Эстетика: Feelwood 25 мм</span>
+        <span class="value-tag v-opt">Конфигурация: массив в ЛМДФ-версии</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Две столешницы на выбор и механизм «бабочка»: раскладывается до 170 см.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">18 911 – 20 655 ₽</span></div></div></section>
+
+  <!-- 17 · Барон-5Д -->
+  <!-- ОПТ: 11232–12798 × 1,7 = 19094–21757 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Барон-5Д</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 02 / 21</span></div>
+      <div class="m-name">Барон-5Д</div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 110/160×68, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница и подстолье:</b> Egger 22/25 мм без декор. элемента</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая / каштановая; сосна касцина</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы / МДФ — комплектацию уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 110→160 см</span>
+        <span class="value-tag v-aest">Эстетика: древесные декоры</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Подстолье Egger по цене среднего уровня: эстетика и конструктив «дорогого» стола без переплат.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">19 094 – 21 757 ₽</span></div></div></section>
+
+  <!-- 18 · Юпитер-Д -->
+  <!-- ОПТ: 11880 × 1,7 = 20196 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Юпитер-Д</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 03 / 21</span></div>
+      <div class="m-name">Юпитер-Д <span class="badge b-hit">Хит</span></div>
+      <div class="m-mech">Вставка «бабочка» · ЛДСП</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 100/134×100, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛДСП или ЛМДФ Egger 25 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая / каштановая; сосна касцина</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — опция +6 242 ₽</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: «бабочка» 100→134 см</span>
+        <span class="value-tag v-ergo">Эргономика: круглая форма без углов</span>
+        <span class="value-tag v-opt">Опция: массив северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Круглый формат с «бабочкой»: безопасная геометрия без углов, 134 см в разложке.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 20 196 ₽</span></div></div></section>
+
+  <!-- 19 · Фрейм-1 -->
+  <!-- ОПТ: 13392 × 1,7 = 22766 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Фрейм-1</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 04 / 21</span></div>
+      <div class="m-name">Фрейм-1 <span class="badge b-hit">Хит</span></div>
+      <div class="m-mech">Нераскладной · круглый</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> диаметр 100 см, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> Egger 25 мм (ЛДСП текстиль бежевый / ЛМДФ-дубы)</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> текстиль бежевый, коньяк, натуральный, каселла коричневая / каштановая</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив дерева</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-ergo">Эргономика: круглый Ø100 см</span>
+        <span class="value-tag v-rel">Конструктив: ноги из массива северной берёзы</span>
+        <span class="value-tag v-safe">Безопасность: форма без углов</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Круглая столешница и массивные ноги: эстетика чистых линий для кухни, гостиной или кабинета.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 22 766 ₽</span></div></div></section>
+
+  <!-- 20 · Барон-3Д -->
+  <!-- ОПТ: 13608–15120 × 1,7 = 23134–25704 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Барон-3Д</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 05 / 21</span></div>
+      <div class="m-name">Барон-3Д</div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 120/170×80, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница и подстолье:</b> Egger 22/25 мм без декор. элемента</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая / каштановая; сосна касцина</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы / МДФ — комплектацию уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 120→170 см</span>
+        <span class="value-tag v-aest">Эстетика: древесные декоры</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Раскладка до 170 см и столешница Egger: функциональность для большой семьи.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">23 134 – 25 704 ₽</span></div></div></section>
+
+  <!-- 21 · Барон-1Д -->
+  <!-- ОПТ: 13878–15930 × 1,7 = 23593–27081 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Барон-1Д</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 06 / 21</span></div>
+      <div class="m-name">Барон-1Д <span class="badge b-out">Вывод</span></div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 136/186×85, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница и подстолье:</b> Egger 25 мм без декор. элемента</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая; сосна касцина</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы / МДФ — комплектацию уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 136→186 см</span>
+        <span class="value-tag v-aest">Эстетика: древесные декоры</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Остатки со склада: доступна ограниченная партия с раскладкой до 186 см и столешницей Egger 25 мм.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">23 593 – 27 081 ₽</span></div></div></section>
+
+  <!-- 22 · Герцог -->
+  <!-- ОПТ: 14790–15890 × 1,7 = 25143–27013 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Герцог</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 07 / 21</span></div>
+      <div class="m-name">Герцог <span class="badge b-new">New</span></div>
+      <div class="m-mech">Нераскладной · скошенный край</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> диаметр 90 и 100 см, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛМДФ Egger 25 мм Feelwood со скошенным краем</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая / каштановая</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив дерева Северной берёзы</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-aest">Эстетика: скошенный край</span>
+        <span class="value-tag v-ergo">Эргономика: круглая форма</span>
+        <span class="value-tag v-rel">Конструктив: ноги из массива северной берёзы</span>
+        <span class="value-tag v-opt">Статус: товар сертифицирован</span>
+      </div>
+      <div class="m-note">Товар сертифицирован.</div>
+      <div class="m-arg"><b>Чем ценен</b>Фабричный скошенный край и круглый формат: эстетика премиума без шпона.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">25 143 – 27 013 ₽</span></div></div></section>
+
+  <!-- 23 · Спейс-3 -->
+  <!-- ОПТ: 15876 × 1,7 = 26989 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Спейс-3</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 08 / 21</span></div>
+      <div class="m-name">Спейс-3</div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 120/160×80, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница и основание:</b> ЛДСП Egger 22 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб крафт табак, дуб крафт серый</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> металл, чёрный</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 120→160 см</span>
+        <span class="value-tag v-aest">Эстетика: крафт-декоры</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Крафт-декоры и металлические ноги — эстетика современного интерьера.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 26 989 ₽</span></div></div></section>
+
+  <!-- 24 · Маркиз -->
+  <!-- ОПТ: 16850–18198 × 1,7 = 28645–30937 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Маркиз</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 09 / 21</span></div>
+      <div class="m-name">Маркиз</div>
+      <div class="m-mech">Со вставкой · закалённое стекло</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 130/175×85, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> закалённое стекло; ЛДСП 22 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> стекло экстрабелое, капучино</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — опция +9 180 ₽</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 130→175 см</span>
+        <span class="value-tag v-aest">Эстетика: экстрабелое стекло</span>
+        <span class="value-tag v-safe">Безопасность: закалённое стекло</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Экстрабелое стекло и раскладка до 175 см: лёгкость в интерьере и функциональность для приёмов.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">28 645 – 30 937 ₽</span></div></div></section>
+
+  <!-- 25 · Барон-6 -->
+  <!-- ОПТ: 17118 × 1,7 = 29101 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Барон-6</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 10 / 21</span></div>
+      <div class="m-name">Барон-6</div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 110/160×68, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> закалённое стекло 4 мм на ЛДСП Egger 25 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> стекло экстрабелое; ноги белый глянец, венге</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы / МДФ с декор. элементом — комплектацию уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 110→160 см</span>
+        <span class="value-tag v-aest">Эстетика: декоративное подстолье</span>
+        <span class="value-tag v-safe">Безопасность: закалённое 4 мм</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Стекло на декоративном подстолье и закалённое стекло 4 мм.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 29 101 ₽</span></div></div></section>
+
+  <!-- 26 · Вуд-2 -->
+  <!-- ОПТ: 17302 × 1,7 = 29413 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Вуд-2</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 11 / 21</span></div>
+      <div class="m-name">Вуд-2 <span class="badge b-out">Вывод</span></div>
+      <div class="m-mech">Нераскладной</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 125×80, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> HPL на МДФ 38 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> HPL сосна Касцина</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> металл</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-aest">Эстетика: HPL на МДФ 38 мм</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Остатки со склада: доступна ограниченная партия со столешницей HPL на МДФ 38 мм.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 29 413 ₽</span></div></div></section>
+
+  <!-- 27 · Юпитер -->
+  <!-- ОПТ: 17550 × 1,7 = 29835 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Юпитер</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 12 / 21</span></div>
+      <div class="m-name">Юпитер</div>
+      <div class="m-mech">Вставка «бабочка» · ЛДСП</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 100/134×100, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> закалённое стекло 4 мм на ЛДСП Egger 25 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> стекло экстрабелое; ноги белый</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — опция +6 242 ₽</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: «бабочка» 100→134 см</span>
+        <span class="value-tag v-ergo">Эргономика: круглая форма</span>
+        <span class="value-tag v-safe">Безопасность: закалённое 4 мм</span>
+        <span class="value-tag v-opt">Опция: массив северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Круглый стеклянный стол с «бабочкой»: экстрабелое стекло и база Egger 25 мм.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 29 835 ₽</span></div></div></section>
+
+  <!-- 28 · Вуд-1 -->
+  <!-- ОПТ: 17928 × 1,7 = 30478 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Вуд-1</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 13 / 21</span></div>
+      <div class="m-name">Вуд-1</div>
+      <div class="m-mech">Нераскладной</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 140×80, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> HPL на МДФ 38 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> HPL сосна Касцина; ноги чёрный матовый</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> металл</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-aest">Эстетика: HPL на МДФ 38 мм</span>
+        <span class="value-tag v-func">Функция: формат 140 см</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Столешница HPL на МДФ 38 мм и металлические ноги — практичное решение для кухни, гостиной или кабинета.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 30 478 ₽</span></div></div></section>
+
+  <!-- 29 · Барон-4 -->
+  <!-- ОПТ: 18576 × 1,7 = 31579 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Барон-4</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 14 / 21</span></div>
+      <div class="m-name">Барон-4 <span class="badge b-hit">Хит</span></div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 120/170×80, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> закалённое стекло 4 мм на ЛДСП Egger 25 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> стекло экстрабелое; ноги белый глянец, венге</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы / МДФ с декор. элементом — комплектацию уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 120→170 см</span>
+        <span class="value-tag v-aest">Эстетика: декоративное подстолье</span>
+        <span class="value-tag v-safe">Безопасность: закалённое 4 мм</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Проверенный хит: стекло, декоративное подстолье и раскладка до 170 см.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 31 579 ₽</span></div></div></section>
+
+  <!-- 30 · Барон-2 -->
+  <!-- ОПТ: 20002 × 1,7 = 34003 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Барон-2</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 15 / 21</span></div>
+      <div class="m-name">Барон-2</div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 136/181×85, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> закалённое стекло 4 мм на ЛДСП Egger 25 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> стекло экстрабелое; ноги белый глянец, венге</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы / МДФ с декор. элементом — комплектацию уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 136→181 см</span>
+        <span class="value-tag v-aest">Эстетика: декоративное подстолье</span>
+        <span class="value-tag v-safe">Безопасность: закалённое 4 мм</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Самое большое стекло линейки: 181 см в разложке и элегантное подстолье.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 34 003 ₽</span></div></div></section>
+
+  <!-- 31 · Граф ЛМДФ -->
+  <!-- ОПТ: 22385 × 1,7 = 38055 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Граф · ЛМДФ</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 16 / 21</span></div>
+      <div class="m-name">Граф · ЛМДФ <span class="badge b-hit">Хит</span></div>
+      <div class="m-mech">Нераскладной</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 130×85, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛМДФ Egger 25 мм коллекции Feelwood</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая / каштановая</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив дерева Северной берёзы</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-aest">Эстетика: Feelwood 25 мм</span>
+        <span class="value-tag v-rel">Конструктив: ноги из массива северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Feelwood 25 мм и массив: базовая конфигурация модели с возможностью апгрейда до шпона (уровень 03).</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 38 055 ₽</span></div></div></section>
+
+  <!-- 32 · Аполло -->
+  <!-- ОПТ: 24786 × 1,7 = 42136; керамогранит 40068 × 1,7 = 68116 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Аполло</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 17 / 21</span></div>
+      <div class="m-name">Аполло</div>
+      <div class="m-mech">Вставка «бабочка» · ЛМДФ</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 136/178×90, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛМДФ Egger 16 мм Feelwood; опция — керамогранит 6 мм на Egger 16 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая / каштановая</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — доступность и стоимость уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: «бабочка» 136→178 см</span>
+        <span class="value-tag v-aest">Эстетика: Feelwood 16 мм</span>
+      </div>
+      <div class="m-note">Также доступна версия с керамогранитом 6 мм — 68 116 ₽.</div>
+      <div class="m-arg"><b>Чем ценен</b>«Бабочка» и возможность керамогранитной столешницы: модель растёт вместе с запросом клиента.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 42 136 ₽</span></div></div></section>
+
+  <!-- 33 · Аполло-2 -->
+ 
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Аполло-2</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 18 / 21</span></div>
+      <div class="m-name">Аполло-2 <span class="badge b-hit">Хит</span></div>
+      <div class="m-mech">Вставка «бабочка» · ЛДСП</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 136/178×90, высота 79 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> Egger 16 мм; доступный материал и декор уточняйте у менеджера</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая / каштановая</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — доступность и стоимость уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: «бабочка» 136→178 см</span>
+        <span class="value-tag v-ergo">Формат: высота стола 79 см</span>
+      </div>
+      <div class="m-note">Также доступна версия с керамогранитом 6 мм — 68 116 ₽.</div>
+      <div class="m-arg"><b>Чем ценен</b>Механизм «бабочка» и высота стола 79 см: модель подойдёт тем, кому важен более высокий формат столешницы.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 42 136 ₽</span></div></div></section>
+
+  <!-- 34 · Барон-8 -->
+  <!-- ОПТ: 24840 × 1,7 = 42228 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Барон-8</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 19 / 21</span></div>
+      <div class="m-name">Барон-8 <span class="badge b-out">Вывод</span></div>
+      <div class="m-mech">Со вставкой</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 160/205×90, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> закалённое стекло 4 мм на ЛДСП Egger 25 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> стекло экстрабелое; ноги белый глянец, венге</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы / МДФ с декор. элементом — комплектацию уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: вставка 160→205 см</span>
+        <span class="value-tag v-aest">Эстетика: декоративное подстолье</span>
+        <span class="value-tag v-safe">Безопасность: закалённое 4 мм</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Остатки со склада: доступна ограниченная партия с раскладкой до 205 см.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 42 228 ₽</span></div></div></section>
+
+  <!-- 35 · Тиволи-1 -->
+  <!-- ОПТ: 24948 × 1,7 = 42412 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Тиволи-1</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 20 / 21</span></div>
+      <div class="m-name">Тиволи-1</div>
+      <div class="m-mech">Вставка «бабочка» · ЛДСП</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 120/160×120, высота 77 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛДСП Egger 25 мм (гикори натуральный / ЛМДФ-дубы)</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> гикори натуральный, коньяк, натуральный, каселла коричневая / каштановая</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Основание:</b> металлокаркас, чёрный; ноги массив северной берёзы — комплектацию уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: «бабочка» 120→160 см</span>
+        <span class="value-tag v-ergo">Эргономика: квадрат 120×120</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Квадратный формат 120×120 для зонирования; металлокаркас с возможностью массивных ножек.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 42 412 ₽</span></div></div></section>
+
+  <!-- 36 · Тиволи -->
+  <!-- ОПТ: 29592 × 1,7 = 50306 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--2"></div><div class="drop"><i class="fas fa-image"></i>Фото · Тиволи</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 02</span><span>модель 21 / 21</span></div>
+      <div class="m-name">Тиволи</div>
+      <div class="m-mech">Вставка «бабочка» · МДФ + HPL</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 120/160×120, высота 77 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> HPL на МДФ 22 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб тёмный, мрамор статуарио (на выводе)</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Основание:</b> металлокаркас, чёрный; ноги массив северной берёзы — комплектацию уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: «бабочка» 120→160 см</span>
+        <span class="value-tag v-aest">Эстетика: HPL на МДФ 22 мм</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Столешница HPL на МДФ 22 мм в сочетании с механизмом «бабочка» и металлокаркасом.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 50 306 ₽</span></div></div></section>
+
+  <!-- 37 · ОБЛОЖКА 03 -->
+<section class="page lv">
+  <div class="lv-left lv--3">
+    <div><div class="lv-kick">Уровень 03 · 7 моделей</div>
+      <div class="lv-num">03</div>
+      <div class="lv-name">Премиальный ·<br><span>Без границ</span></div></div>
+    <div class="lv-price lp--3">Столы 42 082 – 100 980 ₽</div>
+  </div>
+    <div class="lv-right">
+    <p class="lv-desc">Вершина линейки: двухсторонний <b>шпон</b>, <b>керамогранит 6 мм</b>, скошенный край и форматы до 205 см. Шпон — это срез натурального дерева, который стареет благородно, в отличие от выцветающей плёнки. Инвестиция в стол за 60 000 ₽ окупается 15+ годами безупречного вида, что дешевле замены бюджетного аналога каждые 3 года.</p>
+    <div class="lv-tags"><span>Шпон дуба / ореха</span><span>Керамогранит 6 мм</span><span>Скошенный край</span><span>Размеры до 205 см</span></div>
+    <div class="lv-grid">
+      <div class="lv-box"><div class="bt">Для кого</div><p>Для тех, у кого готов проект интерьера: столовая, загородный дом, кабинет, HoReCa. Шпон, керамогранит, большие форматы — всё для статусного решения.</p></div>
+      <div class="lv-box"><div class="bt">Что внутри</div><p>Шпон на МДФ 25 мм, керамогранит 6 мм на Egger 16 мм; ноги — массив северной берёзы; скошенный край у Триумфа / Триумфа НР как опция.</p></div>
+    </div>
+    <div class="lv-models">
+      <div class="bt">7 моделей уровня</div>
+      <ul class="lv-models-list">
+        <li>Граф · шпон</li>
+        <li>Триумф</li>
+        <li>Триумф НР</li>
+        <li>Аполло · керамогранит</li>
+        <li>Фрейм · керамогранит</li>
+        <li class="out">Фрейм-2 · керамогранит</li>
+        <li>Дуэт</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+  <!-- 38 · Граф шпон -->
+  <!-- ОПТ: 24754–29052 × 1,7 = 42082–49388 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--3"></div><div class="drop"><i class="fas fa-image"></i>Фото · Граф · шпон</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 03</span><span>модель 01 / 07</span></div>
+      <div class="m-name">Граф · шпон <span class="badge b-hit">Хит</span></div>
+      <div class="m-mech">Нераскладной</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 130×85, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> двухсторонний шпон на МДФ 25 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб европейский / американский орех</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-aest">Эстетика: двухсторонний шпон</span>
+        <span class="value-tag v-rel">Конструктив: ноги из массива северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Двухсторонний шпон дуба или ореха: эстетика натурального дерева и статус интерьера.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">42 082 – 49 388 ₽</span></div></div></section>
+
+  <!-- 39 · Триумф -->
+  <!-- ОПТ: 36525–59400 × 1,7 = 62093–100980 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--3"></div><div class="drop"><i class="fas fa-image"></i>Фото · Триумф</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 03</span><span>модель 02 / 07</span></div>
+      <div class="m-name">Триумф <span class="badge b-hit">Хит</span></div>
+      <div class="m-mech">Со вставкой · до 205 см</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 160/205×89, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> шпон на МДФ 25 мм или ЛМДФ Egger 25 мм Feelwood</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> шпон дуб/орех; ЛМДФ дуб коньяк, натуральный, каселла коричневая / каштановая</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив дерева</span></div>
+        <div><i class="fas fa-gem"></i><span><b>Опция:</b> скошенный край — +9 350 ₽</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: раскладка до 205 см</span>
+        <span class="value-tag v-aest">Эстетика: шпон / Feelwood</span>
+        <span class="value-tag v-rel">Конструктив: ноги из массива северной берёзы</span>
+      </div>
+      <div class="m-note">Доступен в трёх версиях: ЛМДФ Feelwood, шпон дуба, шпон американского ореха.</div>
+      <div class="m-arg"><b>Чем ценен</b>205 см для больших приёмов, шпон или Feelwood, скошенный край опцией.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">62 093 – 100 980 ₽</span></div></div></section>
+
+  <!-- 40 · Триумф НР -->
+  <!-- ОПТ: 36820–42000 × 1,7 = 62594–71400 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--3"></div><div class="drop"><i class="fas fa-image"></i>Фото · Триумф НР</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 03</span><span>модель 03 / 07</span></div>
+      <div class="m-name">Триумф НР <span class="badge b-new">New</span></div>
+      <div class="m-mech">Нераскладной</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 160 / 180 / 200×89, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> ЛМДФ Egger 25 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> дуб коньяк, натуральный, каселла коричневая / каштановая</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив дерева</span></div>
+        <div><i class="fas fa-gem"></i><span><b>Опция:</b> скошенный край — +9 350 ₽</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: фикс. 160 / 180 / 200 см</span>
+        <span class="value-tag v-aest">Эстетика: Feelwood 25 мм</span>
+        <span class="value-tag v-rel">Конструктив: ноги из массива северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Нераскладной формат 160, 180 или 200 см для большой столовой; скошенный край доступен как опция.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">62 594 – 71 400 ₽</span></div></div></section>
+
+  <!-- 41 · Аполло керамогранит -->
+  <!-- ОПТ: 40068 × 1,7 = 68116 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--3"></div><div class="drop"><i class="fas fa-image"></i>Фото · Аполло · керамогранит</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 03</span><span>модель 04 / 07</span></div>
+      <div class="m-name">Аполло · керамогранит</div>
+      <div class="m-mech">Вставка «бабочка» · ЛМДФ</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 136/178×90, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> керамогранит 6 мм на ЛДСП Egger 16 мм, вставка любая из ЛМДФ</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> керамогранит мрамор белый; выкрас под вставку</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив северной берёзы — доступность и стоимость уточняйте у менеджера</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: «бабочка» 136→178 см</span>
+        <span class="value-tag v-aest">Эстетика: керамогранит 6 мм</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Столешница из керамогранита 6 мм и вставка из любого ЛМДФ — премиальная конфигурация модели.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 68 116 ₽</span></div></div></section>
+
+  <!-- 42 · Фрейм керамогранит -->
+  <!-- ОПТ: 40252 × 1,7 = 68428 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--3"></div><div class="drop"><i class="fas fa-image"></i>Фото · Фрейм · керамогранит</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 03</span><span>модель 05 / 07</span></div>
+      <div class="m-name">Фрейм · керамогранит</div>
+      <div class="m-mech">Нераскладной</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 160/180×90, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> керамогранит 6 мм на ЛДСП Egger 16 мм; опция ЛМДФ Feelwood</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> мрамор белый / серый / серый глянец / чёрный, Icelandic</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив дерева</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-aest">Эстетика: керамогранит 6 мм</span>
+        <span class="value-tag v-rel">Конструктив: ноги из массива северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Столешница из керамогранита 6 мм на массиве берёзы — эстетика мрамора в премиальной конфигурации.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">от 68 428 ₽</span></div></div></section>
+
+  <!-- 43 · Фрейм-2 керамогранит -->
+  <!-- ОПТ: 41062 × 1,7 = 69805 (керамогранит Шарм); ЛДСП мрамор кристал 19764×1,7=33599 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--3"></div><div class="drop"><i class="fas fa-image"></i>Фото · Фрейм-2 · керамогранит</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 03</span><span>модель 06 / 07</span></div>
+      <div class="m-name">Фрейм-2 · керамогранит <span class="badge b-out">Вывод</span></div>
+      <div class="m-mech">Нераскладной · круглый</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> диаметр 118 см, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> керамогранит 6 мм на ЛДСП 16 мм</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> керамогранит Шарм</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив дерева</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-ergo">Эргономика: круглый Ø118 см</span>
+        <span class="value-tag v-aest">Эстетика: керамогранит 6 мм</span>
+      </div>
+      <div class="m-note">Также доступен остаток со склада: версия ЛДСП «мрамор кристалл» — 33 599 ₽.</div>
+      <div class="m-arg"><b>Чем ценен</b>Остатки со склада: доступна ограниченная партия круглого керамогранита Ø 118 см.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">69 805 ₽</span></div></div></section>
+
+  <!-- 44 · Дуэт -->
+  <!-- ОПТ: 46170–48600 × 1,7 = 78489–82620 -->
+  <section class="page mp"><div class="mp-ph"><div class="rib rib--3"></div><div class="drop"><i class="fas fa-image"></i>Фото · Дуэт</div></div>
+    <div class="mp-body"><div class="mp-top"><span class="lvl">Уровень 03</span><span>модель 07 / 07</span></div>
+      <div class="m-name">Дуэт</div>
+      <div class="m-mech">Нераскладной</div>
+      <div class="m-specs">
+        <div><i class="fas fa-ruler-combined"></i><span><b>Габариты:</b> 160/180×90, высота 75 см</span></div>
+        <div><i class="fas fa-table"></i><span><b>Столешница:</b> керамогранит 6 мм на ЛДСП Egger 16 мм; опция ЛМДФ Feelwood</span></div>
+        <div><i class="fas fa-palette"></i><span><b>Декоры:</b> мрамор белый / серый / чёрный, Icelandic; ЛМДФ-дубы</span></div>
+        <div><i class="fas fa-tree"></i><span><b>Ноги:</b> массив дерева</span></div>
+      </div>
+      <div class="m-value">
+        <span class="value-tag v-func">Функция: формат 160/180 см</span>
+        <span class="value-tag v-aest">Эстетика: керамогранит 6 мм</span>
+        <span class="value-tag v-rel">Конструктив: ноги из массива северной берёзы</span>
+      </div>
+      <div class="m-arg"><b>Чем ценен</b>Максимальная столешница линейки и десять декоров: ансамбль для столовой.</div>
+      <div class="m-price"><span class="l">Базовая цена</span><span class="v">78 489 – 82 620 ₽</span></div></div></section>
+
+<!-- 45 · ОБЕДЕННЫЕ ГРУППЫ -->
+<section class="page groups-hero" id="p-groups">
+  <div class="wrap">
+  <div class="groups-kick">От предмета — к пространству</div>
+  <h2 class="groups-h">Обеденные группы. <span>Ансамбль вместо предмета.</span></h2>
+  <p class="groups-lead">Стол и стулья — это <b>не два отдельных решения</b>, а единый ансамбль. Обеденная группа экономит время на подборе, гарантирует совпадение стиля и пропорций, создаёт законченное пространство столовой. Каждая группа собрана из стола и стульев <b>одного уровня ценности</b> — от базовой практичности до статусного дизайнерского решения.</p>
+
+  <div class="groups-grid">
+    <div class="group group--1">
+      <div class="num">01</div>
+      <div class="tag"><i class="fas fa-bolt"></i> Начальный</div>
+      <h4>Быстрый комплект для семьи</h4>
+      <div class="combo">Смайл-1 + Элиос × 4</div>
+      <div class="price">~ 42 900 ₽</div>
+      <p>Надёжный комплект без сложного выбора. Базовая польза по 5 свойствам — идеально для дачи, съёма и первой квартиры.</p>
+    </div>
+    <div class="group group--2">
+      <div class="num">02</div>
+      <div class="tag"><i class="fas fa-sliders"></i> Оптимальный</div>
+      <h4>Центр столовой + эргономика</h4>
+      <div class="combo">Эклипс + Кларк × 6</div>
+      <div class="price">~ 124 000 ₽</div>
+      <p>Механизм «бабочка» + изогнутая спинка. Комплект под сценарий: гости, раскладка, удобная посадка за долгим ужином.</p>
+    </div>
+    <div class="group group--3">
+      <div class="num">03</div>
+      <div class="tag"><i class="fas fa-gem"></i> Премиальный</div>
+      <h4>Дизайнерский ансамбль</h4>
+      <div class="combo">Триумф шпон + Бионик × 6</div>
+      <div class="price">~ 262 000 ₽</div>
+      <p>Статус, шпон, гнутый массив. Пространство как система — единый ансамбль стола и стульев для столовой или загородного дома.</p>
+    </div>
+  </div>
+
+  <div class="groups-foot">
+    <i class="fas fa-arrow-right"></i>
+    Подробные карточки всех стульев и готовые комбинации — в <b>Каталоге «Стулья»</b>, который построен по той же логике трёх уровней ценности.
+  </div>
+</div>
+</section>
+
+  <!-- 46 · МАССИВ, РАССЧИТАННЫЙ НА ГОДЫ -->
+<section class="page page--dark" id="p-massiv">
+  <div class="wrap" style="justify-content:center">
+    <div class="sec-kick" style="color:var(--brass-l)">Фабрика «Комфортстол»</div>
+    <h2 class="sec-h" style="color:#fff">30 дней техпроцесса. <span>Мебель, которая служит десятилетиями.</span></h2>
+    <p style="font-size:clamp(14px,1.5vw,18px);color:#cbbdb2;line-height:1.6;max-width:840px;margin-bottom:32px">
+      Массив северной берёзы — сверхплотный материал. Чтобы мебель никогда не скрипела и её не вело, мы соблюдаем строгий месячный цикл обработки.
+    </p>
+    <div class="tech-grid" style="flex:1;margin:0">
+      <div class="tech">
+        <div class="d">10<span style="font-size:14px;margin-left:6px">дн</span></div>
+        <div style="font-family:var(--fd);font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--terra-l);margin-bottom:8px">ЭТАП 01</div>
+        <p>Стабилизация и снятие внутреннего напряжения волокон древесины.</p>
+      </div>
+      <div class="tech">
+        <div class="d">10<span style="font-size:14px;margin-left:6px">дн</span></div>
+        <div style="font-family:var(--fd);font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--terra-l);margin-bottom:8px">ЭТАП 02</div>
+        <p>Точная геометрия и финишная выточка несущих опор.</p>
+      </div>
+      <div class="tech">
+        <div class="d">10<span style="font-size:14px;margin-left:6px">дн</span></div>
+        <div style="font-family:var(--fd);font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--terra-l);margin-bottom:8px">ЭТАП 03</div>
+        <p>Послойное нанесение и полная полимеризация защитного покрытия.</p>
+      </div>
+    </div>
+    <div class="tech-final" style="margin-top:28px">Мы создаём мебель на века. <span>Быстрее — значит нарушить прочность.</span></div>
+  </div>
+</section>
+
+<!-- 47 · АНАТОМИЯ СТОЛА -->
+<section class="page seller-page" id="p-anatomy">
+  <div class="wrap" style="position:relative">
+    <div class="teacher-label">Справочник · анатомия</div>
+    <div class="sec-kick">Анатомия стола</div>
+    <h2 class="sec-h">Где что и <span>из чего</span></h2>
+    <div class="anatomy">
+      <div class="anatomy-visual">
+        <div class="placeholder"><i class="fas fa-image"></i>Фото стола<br>вид сбоку</div>
+      </div>
+      <div class="anatomy-list">
+        <div class="anatomy-item"><div class="num">1</div><div><h4>Столешница</h4><p>Главная рабочая поверхность. От материала зависит эстетика, долговечность и тактильность.</p></div></div>
+        <div class="anatomy-item"><div class="num">2</div><div><h4>Кромка и край</h4><p>Прямая кромка — базовая; скошенный край — премиальная фабричная обработка.</p></div></div>
+        <div class="anatomy-item"><div class="num">3</div><div><h4>Царга / подстолье</h4><p>Силовой пояс под столешницей. Бывает из ЛДСП, МДФ или с декоративным элементом.</p></div></div>
+        <div class="anatomy-item"><div class="num">4</div><div><h4>Механизм</h4><p>Вкладная вставка или «бабочка». Определяет, как стол раскладывается для гостей.</p></div></div>
+        <div class="anatomy-item"><div class="num">5</div><div><h4>Основание и опоры</h4><p>Металлокаркас, подстолье МДФ или массив берёзы. Держит геометрию и нагрузку.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 48 · МАТЕРИАЛЫ СТОЛЕШНИЦ (ОПТИМИЗИРОВАННАЯ ВЫСОТА, ДИЗАЙН СОХРАНЕН) -->
+<style>
+  /* Точечные исправления ТОЛЬКО для этой секции, чтобы всё влезло, не ломая дизайн */
+  .hor-list { gap: 10px !important; } /* Было 14px */
+  .hor-card { 
+    padding: 14px 18px !important; /* Было 18px 20px */
+    grid-template-columns: 150px 1fr !important; /* Было 180px, чуть уже картинка */
+    gap: 16px !important; /* Было 20px */
+    align-items: start !important; /* ВАЖНО: текст не растягивает карточку по высоте картинки */
+  }
+  .hor-visual { aspect-ratio: 16/9 !important; } /* Было 16/10, чуть компактнее */
+  .hor-body h4 { font-size: 15px !important; margin-bottom: 4px !important; } /* Было 17px */
+  .hor-body .desc { font-size: 13px !important; line-height: 1.4 !important; margin-bottom: 6px !important; }
+  .hor-body .models { font-size: 11px !important; margin-bottom: 6px !important; }
+  .hor-body .why { padding: 8px 12px !important; font-size: 12px !important; }
+  .noble-wrap { margin-bottom: 12px !important; }
+</style>
+
+<section class="page seller-page" id="p-materials">
+  <div class="wrap" style="position:relative">
+    <div class="teacher-label">Справочник · материалы</div>
+    <div class="sec-kick">Материалы столешниц</div>
+    <h2 class="sec-h">От базовых к <span>премиальным</span></h2>
+    
+    <div class="noble-wrap">
+      <div class="noble-axis"><span>Практичный старт</span><div class="arr"></div><span>Премиальный выбор</span></div>
+      <div class="noble-scale">
+        <div class="noble-step on c-b">ЛДСП 16 мм</div>
+        <div class="noble-step on c-m">Feelwood 25 мм</div>
+        <div class="noble-step on c-m">Стекло 4 мм</div>
+        <div class="noble-step on c-m">HPL</div>
+        <div class="noble-step on c-p">Шпон</div>
+        <div class="noble-step on c-p">Керамогранит</div>
+      </div>
+    </div>
+
+    <div class="hor-list">
+      <!-- Карточка 1 -->
+      <div class="hor-card h-basic">
+        <div class="hor-visual"><div class="placeholder">ЛДСП Egger<br>16 мм</div></div>
+        <div class="hor-body">
+          <span class="tag">Уровень 01 · Базовый</span>
+          <h4>ЛДСП / ЛМДФ Egger 16 мм</h4>
+          <p class="desc">Практичная столешница с богатой палитрой декоров и стабильной геометрией. Основа базовых моделей.</p>
+          <p class="models">Смайл-1, Бейсик 88, 6Д, -3, -4, -5; основа под стекло в Бейсик 6 и 68.</p>
+          <div class="why"><b>Почему это важно</b>Декор и размер подбираются под задачу. Практичная столешница на каждый день.</div>
+        </div>
+      </div>
+
+      <!-- Карточка 2 -->
+      <div class="hor-card h-mid">
+        <div class="hor-visual"><div class="placeholder">ЛМДФ Feelwood<br>25 мм</div></div>
+        <div class="hor-body">
+          <span class="tag">Уровень 02 · Оптимальный</span>
+          <h4>ЛМДФ Egger 25 мм · Feelwood</h4>
+          <p class="desc">Более толстая столешница с древесным декором коллекции Feelwood и глубоким тиснением.</p>
+          <p class="models">Эклипс, Герцог, Граф ЛМДФ, Триумф ЛМДФ.</p>
+          <div class="why"><b>Почему это важно</b>Стол выглядит выразительнее — становится заметной частью интерьера.</div>
+        </div>
+      </div>
+
+      <!-- Карточка 3 -->
+      <div class="hor-card h-premium">
+        <div class="hor-visual"><div class="placeholder">Шпон · Керамогранит<br>6 мм</div></div>
+        <div class="hor-body">
+          <span class="tag">Уровень 03 · Премиальный</span>
+          <h4>Шпон · Керамогранит 6 мм · Закалённое стекло</h4>
+          <p class="desc">Натуральные материалы: шпон дуба/ореха, каменная поверхность или воздушное стекло.</p>
+          <p class="models">Граф шпон, Триумф, Фрейм, Дуэт, Барон-2/4/6/8.</p>
+          <div class="why"><b>Почему это важно</b>Статус и тактильность. Стол становится центром интерьера.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 49 · МЕХАНИЗМЫ ТРАНСФОРМАЦИИ -->
+<section class="page seller-page" id="p-mech">
+  <div class="wrap" style="position:relative">
+    <div class="teacher-label">Справочник · механизмы</div>
+    <div class="sec-kick">Механизмы трансформации</div>
+    <h2 class="sec-h">Как стол <span>становится больше</span></h2>
+    <div class="prog">
+      <div class="prog-card p1">
+        <div class="prog-visual">
+          <div class="placeholder">Вкладная<br>вставка</div>
+        </div>
+        <span class="badge">Уровень 01</span>
+        <h4>Вкладная вставка</h4>
+        <div class="sub">Классический механизм</div>
+        <ul>
+          <li>Столешница раздвигается</li>
+          <li>Вставка кладётся сверху</li>
+          <li>Хранится отдельно</li>
+          <li>Простая и надёжная</li>
+        </ul>
+        <div class="models">Смайл-1, Бейсик 6Д, 68, -5, -4, 6, -3</div>
+        <div class="why"><b>Почему это важно</b>В будни стол компактный, приехали гости — за две минуты становится просторным.</div>
+      </div>
+      <div class="prog-card p2">
+        <div class="prog-visual">
+          <div class="placeholder">Механизм<br>«Бабочка»</div>
+        </div>
+        <span class="badge">Уровень 02</span>
+        <h4>«Бабочка»</h4>
+        <div class="sub">Вставка внутри стола</div>
+        <ul>
+          <li>Хранится под столешницей</li>
+          <li>Раскрывается одним движением</li>
+          <li>Не нужно искать место</li>
+          <li>Быстро и без усилий</li>
+        </ul>
+        <div class="models">Эклипс, Юпитер, Аполло, Аполло-2, Тиволи, Тиволи-1</div>
+        <div class="why"><b>Почему это важно</b>Раскладывается за секунды без усилий — справится любой, даже ребёнок.</div>
+      </div>
+      <div class="prog-card p3">
+        <div class="prog-visual">
+          <div class="placeholder">Нераскладной<br>формат</div>
+        </div>
+        <span class="badge">Уровень 03</span>
+        <h4>Стационарный формат</h4>
+        <div class="sub">Монолитная конструкция</div>
+        <ul>
+          <li>Фиксированный размер</li>
+          <li>Без подвижных узлов</li>
+          <li>Максимум надёжности</li>
+          <li>Чистый силуэт</li>
+        </ul>
+        <div class="models">Граф шпон, Триумф НР, Фрейм, Дуэт</div>
+        <div class="why"><b>Почему это важно</b>Монолит держит геометрию десятилетиями. Для проектов, где стол стоит постоянно.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 50 · ОСНОВАНИЯ И ОПОРЫ -->
+<section class="page seller-page" id="p-base">
+  <div class="wrap" style="position:relative">
+    <div class="teacher-label">Справочник · основания</div>
+    <div class="sec-kick">Основания и опоры</div>
+    <h2 class="sec-h">На чём <span>стоит стол</span></h2>
+    <div class="prog">
+      <div class="prog-card p1">
+        <div class="prog-visual">
+          <div class="placeholder">Металло-<br>каркас</div>
+        </div>
+        <span class="badge">Уровень 01</span>
+        <h4>Металлокаркас</h4>
+        <div class="sub">Чёрный или белый</div>
+        <ul>
+          <li>Стальная рама</li>
+          <li>Держит геометрию годами</li>
+          <li>Выдерживает нагрузки</li>
+          <li>Массив как опция</li>
+        </ul>
+        <div class="models">Бейсик-3, -4, -5, Спейс-3, Тиволи, Тиволи-1</div>
+        <div class="why"><b>Почему это важно</b>Каркас не скрипит и не расшатывается. При переезде — лёгкий и компактный.</div>
+      </div>
+      <div class="prog-card p2">
+        <div class="prog-visual">
+          <div class="placeholder">Подстолье МДФ<br>с декором</div>
+        </div>
+        <span class="badge">Уровень 02</span>
+        <h4>Подстолье МДФ с декором</h4>
+        <div class="sub">Царга с элементом</div>
+        <ul>
+          <li>Декоративная царга</li>
+          <li>Стол выглядит дороже</li>
+          <li>Ножки: массив или МДФ</li>
+          <li>Эстетика без переплаты</li>
+        </ul>
+        <div class="models">Барон-2, -4, -6, -8</div>
+        <div class="why"><b>Почему это важно</b>Стол визуально выглядит как премиальная модель — без удорожания конструкции.</div>
+      </div>
+      <div class="prog-card p3">
+        <div class="prog-visual">
+          <div class="placeholder">Массив<br>берёзы</div>
+        </div>
+        <span class="badge">Уровень 02–03</span>
+        <h4>Массив северной берёзы</h4>
+        <div class="sub">Живой материал</div>
+        <ul>
+          <li>Сверхплотная берёза</li>
+          <li>Индивидуальная фактура</li>
+          <li>30 дней техпроцесса</li>
+          <li>Стабильность на десятилетия</li>
+        </ul>
+        <div class="models">Герцог, Граф, Фрейм-1, Триумф, Дуэт</div>
+        <div class="why"><b>Почему это важно</b>Каждый стол — единственный в своём роде. Ножки не рассыхаются и не скрипят десятилетиями.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- 51 · СЕРВИС -->
+<section class="page" id="p-service">
+  <div class="wrap">
+    <div class="sec-kick">Условия и сервис</div>
+    <h2 class="sec-h">Покупка — <span>прозрачно</span></h2>
+    <div class="srv-grid">
+      <div class="srv">
+        <i class="fas fa-shield-halved"></i>
+        <h4>Гарантия</h4>
+        <p>12 месяцев с даты покупки.</p>
+      </div>
+      <div class="srv">
+        <i class="fas fa-truck-fast"></i>
+        <h4>Доставка</h4>
+        <p>Платная услуга, в стоимость товара не включена. Согласовываем удобные дату и время — без длительного ожидания.</p>
+      </div>
+      <div class="srv">
+        <i class="fas fa-screwdriver-wrench"></i>
+        <h4>Сборка</h4>
+        <p>Платная услуга. Профессиональная сборка в удобное для вас время — без мусора и лишних хлопот.</p>
+      </div>
+      <div class="srv">
+        <i class="fas fa-credit-card"></i>
+        <h4>Оплата</h4>
+        <p>Предоплата 50% при оформлении заказа, остаток — перед доставкой.</p>
+      </div>
+      <div class="srv">
+        <i class="fas fa-hand-sparkles"></i>
+        <h4>Уход за материалами</h4>
+        <p>Все рекомендации по уходу прописаны в инструкции по эксплуатации, которая прилагается к товару.</p>
+      </div>
+      <div class="srv">
+        <i class="fas fa-piggy-bank"></i>
+        <h4>Рассрочка и хранение</h4>
+        <p>После 100% оплаты храним заказ бесплатно в течение 10 дней — успеете завершить ремонт и подготовить пространство.</p>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:13px;color:var(--t3);font-weight:600;text-align:center">Киров, 2026 · comfortstol.com</p>
+  </div>
+</section>
+
+    <!-- 52 · О КОМПАНИИ -->
+<section class="page page--dark" id="p-about">
+  <div class="wrap">
+    <div class="sec-kick" style="color:var(--terra-l)">О компании</div>
+    <h2 class="sec-h" style="color:#fff">Фабрика <span>«Комфортстол»</span></h2>
+    <p style="font-size:17px;color:#cbbdb2;line-height:1.7;max-width:760px;margin-bottom:32px">Собственное производство с 2002 года. Массив северной берёзы проходит 30-дневный технологический цикл: стабилизация древесины, точная геометрия опор и полимеризация защитного покрытия. Отделка — мастера в третьем поколении, традиции со Слободского мебельного комбината (работает с 1903 года). Механизмы трансформации — сотрудники с опытом авиа- и ракетостроения. Материалы: ЛДСП Egger, кромка REHAU, закалённое стекло. Вся продукция испытана в центре «Вектор» и сертифицирована. Поставки напрямую от фабрики — без посредников.</p>
+    <div class="addr">
+      <div class="qr">
+        <!-- ВАРИАНТ 1: онлайн-генератор (если интернет есть) -->
+        <img src="https://qrcode.tec-it.com/API/QRCode?data=https%3A%2F%2Fcomfortstol.com&imagewidth=300&margin=0" alt="QR-код">
+        
+        <!-- ВАРИАНТ 2: локальный файл (надёжнее)
+             Раскомментируйте и положите файл qr.png рядом с html:
+        <img src="qr.png" alt="QR-код на сайт comfortstol.com">
+        -->
+      </div>
+      <div>
+        <h3>Торговая точка</h3>
+        <p><b style="color:#fff">ТЦ «Центральный Дом Мебели»</b> · 1 этаж</p>
+        <p style="margin-top:12px"><span class="ph">8-912-701-5051</span> — салон</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+const pages = [...document.querySelectorAll('.page')];
+let cur = 0;
+
+// ВАЖНО: Мы больше НЕ перезаписываем ID страниц (p.cover, p.toc и т.д.), 
+// чтобы не ломать CSS-правила и якорные ссылки.
+
+function show(i) {
+  cur = Math.max(0, Math.min(pages.length - 1, i));
+  
+  pages.forEach((p, k) => {
+    if (k === cur) {
+      p.classList.add('on');
+      // ИСПРАВЛЕНИЕ 1: Принудительно поднимаем активную страницу на самый верх.
+      // Это гарантирует, что титул (даже с высоким z-index в CSS) 
+      // не будет просвечивать сквозь новую страницу во время анимации.
+      p.style.zIndex = '10'; 
+    } else {
+      p.classList.remove('on');
+      p.style.zIndex = '1';
+    }
+  });
+  
+  const cnt = document.getElementById('cnt');
+  if (cnt) cnt.textContent = (cur + 1) + ' / ' + pages.length;
+  
+  // ИСПРАВЛЕНИЕ 2: Мгновенно сбрасываем скролл наверх при смене страницы.
+  // Это убирает "мелькание" из-за скачков полосы прокрутки.
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function go(d) { 
+  show(cur + d); 
+}
+
+function showById(id) {
+  const idx = pages.findIndex(p => p.id === id);
+  if (idx !== -1) { 
+    show(idx); 
+  } else { 
+    console.error("Секция не найдена: " + id); 
+  }
+}
+
+function goToMap() {
+  const i = pages.findIndex(p => p.classList.contains('navmap'));
+  if (i !== -1) show(i);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight') go(1);
+  if (e.key === 'ArrowLeft') go(-1);
+});
+
+// Инициализация
+show(0);
+</script>
+
+<script>
+// Блок с каруселями (оставлен без изменений, работает корректно)
+window.PRODUCT_IMAGES = {"аполло": {"folder": "Аполло", "files": ["Аполло_01.png", "Аполло_02.png", "Аполло_03.jpg", "Аполло_04.png", "Аполло_05.png", "Аполло_06.png", "Аполло_07.png", "Аполло_08.png", "Аполло_09.png", "Аполло_10.jpg"]}, "аполло2": {"folder": "Аполло 2", "files": ["Аполло_2_01.png", "Аполло_2_02.png", "Аполло_2_03.png", "Аполло_2_04.jpg", "Аполло_2_05.png", "Аполло_2_06.png", "Аполло_2_07.png", "Аполло_2_08.jpg"]}, "барон1д": {"folder": "Барон-1Д", "files": ["Барон-1Д_01.png", "Барон-1Д_02.png", "Барон-1Д_03.png", "Барон-1Д_04.png", "Барон-1Д_05.png", "Барон-1Д_06.png", "Барон-1Д_07.jpg"]}, "барон2": {"folder": "Барон-2", "files": ["Барон-2_01.png", "Барон-2_02.png", "Барон-2_03.png", "Барон-2_04.png", "Барон-2_05.jpg", "Барон-2_06.png", "Барон-2_07.png"]}, "барон3д": {"folder": "Барон-3Д", "files": ["Барон-3Д_01.png", "Барон-3Д_02.png", "Барон-3Д_03.png", "Барон-3Д_04.png", "Барон-3Д_05.png", "Барон-3Д_06.png", "Барон-3Д_07.jpg"]}, "барон4": {"folder": "Барон-4", "files": ["Барон-4_01.png", "Барон-4_02.png", "Барон-4_03.png", "Барон-4_04.png", "Барон-4_05.png", "Барон-4_06.jpg", "Барон-4_07.png"]}, "барон5д": {"folder": "Барон-5Д", "files": ["Барон-5Д_01.png", "Барон-5Д_02.png", "Барон-5Д_03.png", "Барон-5Д_04.png", "Барон-5Д_05.png", "Барон-5Д_06.png", "Барон-5Д_07.jpg"]}, "барон6": {"folder": "Барон-6", "files": ["Барон-6_01.png", "Барон-6_02.png", "Барон-6_03.jpg", "Барон-6_04.png", "Барон-6_05.png", "Барон-6_06.png", "Барон-6_07.png"]}, "барон8": {"folder": "Барон-8", "files": ["Барон-8_01.png", "Барон-8_02.png", "Барон-8_03.png", "Барон-8_04.jpg", "Барон-8_05.png"]}, "бейсик6д": {"folder": "Бейсик 6Д", "files": ["Бейсик_6Д_01.png", "Бейсик_6Д_02.png", "Бейсик_6Д_03.png", "Бейсик_6Д_04.png", "Бейсик_6Д_05.png", "Бейсик_6Д_06.png", "Бейсик_6Д_07.png", "Бейсик_6Д_08.png"]}, "бейсик88": {"folder": "Бейсик 88", "files": ["Бейсик_88_01.png", "Бейсик_88_02.png", "Бейсик_88_03.png", "Бейсик_88_04.jpg", "Бейсик_88_05.png", "Бейсик_88_06.png", "Бейсик_88_07.png", "Бейсик_88_08.png", "Бейсик_88_09.png", "Бейсик_88_10.jpg"]}, "бейсик3": {"folder": "Бейсик-3", "files": ["Бейсик-3_01.png", "Бейсик-3_02.png", "Бейсик-3_03.png", "Бейсик-3_04.png", "Бейсик-3_05.png", "Бейсик-3_06.png", "Бейсик-3_07.png", "Бейсик-3_08.png", "Бейсик-3_09.png", "Бейсик-3_10.png", "Бейсик-3_11.png", "Бейсик-3_12.jpg", "Бейсик-3_13.png", "Бейсик-3_14.png", "Бейсик-3_15.png", "Бейсик-3_16.png", "Бейсик-3_17.png", "Бейсик-3_18.png", "Бейсик-3_19.png", "Бейсик-3_20.png", "Бейсик-3_21.png"]}, "бейсик4": {"folder": "Бейсик-4", "files": ["Бейсик-4_01.png", "Бейсик-4_02.png", "Бейсик-4_03.png", "Бейсик-4_04.png", "Бейсик-4_05.png", "Бейсик-4_06.png", "Бейсик-4_07.png", "Бейсик-4_08.png", "Бейсик-4_09.png", "Бейсик-4_10.png", "Бейсик-4_11.jpg", "Бейсик-4_12.png", "Бейсик-4_13.png", "Бейсик-4_14.png", "Бейсик-4_15.png", "Бейсик-4_16.png", "Бейсик-4_17.png", "Бейсик-4_18.png", "Бейсик-4_19.png"]}, "бейсик6": {"folder": "Бейсик-6", "files": ["Бейсик-6_01.png", "Бейсик-6_02.jpg", "Бейсик-6_03.png", "Бейсик-6_04.png", "Бейсик-6_05.png", "Бейсик-6_06.png", "Бейсик-6_07.png", "Бейсик-6_08.png", "Бейсик-6_09.png", "Бейсик-6_10.png", "Бейсик-6_11.png", "Бейсик-6_12.png", "Бейсик-6_13.png", "Бейсик-6_14.png", "Бейсик-6_15.png"]}, "бейсик68": {"folder": "Бейсик-68", "files": ["Бейсик-68_01.png", "Бейсик-68_02.png", "Бейсик-68_03.png", "Бейсик-68_04.png", "Бейсик-68_05.png", "Бейсик-68_06.png"]}, "вуд1": {"folder": "Вуд-1", "files": ["Вуд-1_01.jpg", "Вуд-1_02.png"]}, "герцог": {"folder": "Герцог", "files": ["Герцог_01.png", "Герцог_02.png", "Герцог_03.jpg", "Герцог_04.png", "Герцог_05.png", "Герцог_06.jpg", "Герцог_07.png"]}, "граф": {"folder": "Граф", "files": ["Граф_01.jpg", "Граф_02.jpg", "Граф_03.jpg"]}, "дуэт": {"folder": "Дуэт", "files": ["Дуэт_01.png", "Дуэт_02.png", "Дуэт_03.png", "Дуэт_04.png", "Дуэт_05.png", "Дуэт_06.png", "Дуэт_07.png", "Дуэт_08.png", "Дуэт_09.png", "Дуэт_10.png", "Дуэт_11.png", "Дуэт_12.png", "Дуэт_13.png", "Дуэт_14.png", "Дуэт_15.png", "Дуэт_16.png", "Дуэт_17.png", "Дуэт_18.png", "Дуэт_19.png", "Дуэт_20.png", "Дуэт_21.png", "Дуэт_22.png", "Дуэт_23.jpg", "Дуэт_24.png", "Дуэт_25.png", "Дуэт_26.jpg", "Дуэт_27.png", "Дуэт_28.png", "Дуэт_29.png", "Дуэт_30.png", "Дуэт_31.png", "Дуэт_32.png"]}, "маркиз": {"folder": "Маркиз", "files": ["Маркиз_01.png", "Маркиз_02.png", "Маркиз_03.png", "Маркиз_04.png", "Маркиз_05.jpg", "Маркиз_06.png", "Маркиз_07.jpg", "Маркиз_08.png", "Маркиз_09.jpg"]}, "смайл1": {"folder": "Смайл-1", "files": ["Смайл-1_01.png", "Смайл-1_02.png", "Смайл-1_03.png", "Смайл-1_04.png", "Смайл-1_05.png", "Смайл-1_06.png", "Смайл-1_07.png", "Смайл-1_08.png"]}, "спейс3": {"folder": "Спейс 3", "files": ["Спейс_3_01.png", "Спейс_3_02.png", "Спейс_3_03.png", "Спейс_3_04.png"]}, "тиволи": {"folder": "Тиволи", "files": ["Тиволи_01.jpg", "Тиволи_02.png", "Тиволи_03.jpg", "Тиволи_04.png"]}, "тиволи1": {"folder": "Тиволи 1", "files": ["Тиволи_1_01.png", "Тиволи_1_02.jpg", "Тиволи_1_03.png"]}, "триумф": {"folder": "Триумф", "files": ["Триумф_01.jpg", "Триумф_02.jpg", "Триумф_03.jpg", "Триумф_04.jpg", "Триумф_05.png", "Триумф_06.png", "Триумф_07.jpg", "Триумф_08.png", "Триумф_09.png"]}, "фрейм": {"folder": "Фрейм", "files": ["Фрейм_01.png", "Фрейм_02.png", "Фрейм_03.png", "Фрейм_04.png", "Фрейм_05.png", "Фрейм_06.png", "Фрейм_07.png", "Фрейм_08.png", "Фрейм_09.png", "Фрейм_10.png", "Фрейм_11.png", "Фрейм_12.png", "Фрейм_13.png", "Фрейм_14.png", "Фрейм_15.png", "Фрейм_16.png", "Фрейм_17.png", "Фрейм_18.png", "Фрейм_19.png", "Фрейм_20.png", "Фрейм_21.png", "Фрейм_22.png", "Фрейм_23.png", "Фрейм_24.png", "Фрейм_25.png", "Фрейм_26.png", "Фрейм_27.jpg", "Фрейм_28.png", "Фрейм_29.png", "Фрейм_30.png", "Фрейм_31.png"]}, "фрейм1": {"folder": "Фрейм 1", "files": ["Фрейм_1_01.png", "Фрейм_1_02.png", "Фрейм_1_03.png", "Фрейм_1_04.png", "Фрейм_1_05.jpg", "Фрейм_1_06.png", "Фрейм_1_07.png", "Фрейм_1_08.png", "Фрейм_1_09.png", "Фрейм_1_10.png", "Фрейм_1_11.png", "Фрейм_1_12.png", "Фрейм_1_13.png", "Фрейм_1_14.png"]}, "фрейм2": {"folder": "Фрейм 2", "files": ["Фрейм_2_01.png", "Фрейм_2_02.png", "Фрейм_2_03.png", "Фрейм_2_04.png", "Фрейм_2_05.png", "Фрейм_2_06.png", "Фрейм_2_07.png", "Фрейм_2_08.png", "Фрейм_2_09.png", "Фрейм_2_10.png", "Фрейм_2_11.jpg", "Фрейм_2_12.png", "Фрейм_2_13.png"]}, "эклипс": {"folder": "Эклипс", "files": ["Эклипс_01.png", "Эклипс_02.jpg", "Эклипс_03.png", "Эклипс_04.jpg", "Эклипс_05.png", "Эклипс_06.jpg", "Эклипс_07.png", "Эклипс_08.png", "Эклипс_09.png"]}, "юпитер": {"folder": "Юпитер", "files": ["Юпитер_01.png", "Юпитер_02.jpg", "Юпитер_03.jpg", "Юпитер_04.png", "Юпитер_05.png", "Юпитер_06.jpg", "Юпитер_07.png", "Юпитер_08.png"]}, "юпитерд": {"folder": "Юпитер - Д", "files": ["Юпитер_-_Д_01.png", "Юпитер_-_Д_02.png", "Юпитер_-_Д_03.png", "Юпитер_-_Д_04.png", "Юпитер_-_Д_05.png", "Юпитер_-_Д_06.png"]}};
+
+(function(){
+  function n(s){return s.toLowerCase().replace(/[-–—\s·.]+/g,"").trim();}
+  function getName(p){var e=p.querySelector(".m-name");if(!e)return null;var c=e.cloneNode(true);c.querySelectorAll(".badge").forEach(b=>b.remove());return c.textContent.trim();}
+  function enc(s){return encodeURIComponent(s);}
+  function createCarousel(folder, files){var w=document.createElement("div");w.className="carousel";var t=document.createElement("div");t.className="car-track";files.forEach(f=>{var d=document.createElement("div");d.className="car-slide";d.style.backgroundImage="url('"+enc(folder)+"/"+enc(f)+"')";t.appendChild(d);});var prev=document.createElement("button");prev.className="car-btn car-prev";prev.innerHTML="‹";var next=document.createElement("button");next.className="car-btn car-next";next.innerHTML="›";var dots=document.createElement("div");dots.className="car-dots";var counter=document.createElement("div");counter.className="car-counter";counter.textContent="1 / "+files.length;w.appendChild(t);w.appendChild(prev);w.appendChild(next);w.appendChild(dots);w.appendChild(counter);var idx=0,total=files.length;function upd(){t.style.transform="translateX(-"+idx*100+"%)";counter.textContent=(idx+1)+" / "+total;dots.querySelectorAll(".car-dot").forEach((d,i)=>d.classList.toggle("on",i===idx));}prev.onclick=()=>{idx=(idx-1+total)%total;upd();};next.onclick=()=>{idx=(idx+1)%total;upd();};files.forEach((_,i)=>{var d=document.createElement("button");d.className="car-dot"+(i===0?" on":"");d.onclick=()=>{idx=i;upd();};dots.appendChild(d);});var sx=0;w.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;},{passive:true});w.addEventListener("touchend",e=>{var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50){dx<0?next.onclick():prev.onclick();}},{passive:true});return w;}
+  document.querySelectorAll(".page.mp").forEach(page=>{var model=getName(page);if(!model)return;var key=n(model);var info=window.PRODUCT_IMAGES[key];var ph=page.querySelector(".mp-ph");var drop=ph&&ph.querySelector(".drop");if(info&&info.files.length>0){if(drop)drop.style.display="none";ph.appendChild(createCarousel(info.folder, info.files));}else{if(drop)drop.innerHTML='<i class="fas fa-image"></i><span>Фото · '+model+'</span>';}});
+})();
+</script>
+</body>
+</html>
